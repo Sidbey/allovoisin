@@ -4,14 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routes = require('./app/routes/index');
+var users = require('./app/routes/users');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -55,6 +56,12 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+// Connection a la base MongoDb
+mongoose.connect('mongodb://localhost/Allovoisin', function (err) {
+  if (err)
+    throw err;
 });
 
 
