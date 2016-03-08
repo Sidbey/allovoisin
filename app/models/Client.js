@@ -9,7 +9,8 @@ var schema = new Schema({
     lastName: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    address: {type: Address, required: true}
+    addressID: {type: Number, required: true},
+    isTutor: {type: Boolean, default: false}
 });
 
 //Appelé avant d'effectuer la sauvegarde d'un utilisateur
