@@ -56,6 +56,11 @@ var Clients = {
             });
         });
     },
+    signOut: function(req, res, next) {
+        req.session.isAuthenticated = false;
+        req.session.email = "";
+        res.redirect('/');
+    },
     signUp: function (req, res, next) {
         Client.findOne({'email': req.body.email}, function (err, clientInBase) {
             var error = [];
