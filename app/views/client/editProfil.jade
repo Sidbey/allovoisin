@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+
+    form(action='/client/editProfil' method='post')
+        p name
+        input(name='firstName')
+        input(name='lastName')
+        input(name='email')
+        p pass
+        input(name='password')
+        input(name='confirmPass')
+        input(name='age')
+        p address
+        input(name='road')
+        input(name='postalCode')
+        input(name='city')
+        input(name='country')
+        button(name='submit') valider
