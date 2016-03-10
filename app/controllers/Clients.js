@@ -33,8 +33,8 @@ var Clients = {
         Client.findOne({'email': req.body.email}, function (err, client) {
             if (err) throw (err);
             var error = [];
-            var checkLogin = new Promise(function(render){
-                if(client) {
+            var checkLogin = new Promise(function (render) {
+                if (client) {
                     client.comparePassword(req.body.password, function (err, isMatch) {
                         if (isMatch) {
                             req.session.isAuthenticated = true;
@@ -49,14 +49,14 @@ var Clients = {
                 }
                 render();
             });
-            checkLogin.then(function() {
+            checkLogin.then(function () {
                 if (error.length != 0) {
                     res.render('signIn', {title: 'Tutor-A', form: req.body, error: error});
                 }
             });
         });
     },
-    signOut: function(req, res, next) {
+    signOut: function (req, res, next) {
         req.session.isAuthenticated = false;
         req.session.email = "";
         res.redirect('/');
@@ -79,7 +79,6 @@ var Clients = {
             // API key :  AIzaSyA2Uh8w2_q63RDbAkyXrL6VauMCVc0_slU
             var datasMaps = "";
             var addressInline = req.body.road + ", " + req.body.postalCode + " " + req.body.city + ", " + req.body.country;
-            console.log('/maps/api/geocode/json?address=' + addressInline.replace(/\s/g, "+") + '&key=AIzaSyA2Uh8w2_q63RDbAkyXrL6VauMCVc0_slU');
             var options = {
                 host: "maps.googleapis.com",
                 path: '/maps/api/geocode/json?address=' + addressInline.replace(/\s/g, "+") + '&key=AIzaSyBh-ZMhtx_g97Xs2ZLBryqd8ldApqo_veI'
@@ -145,6 +144,15 @@ var Clients = {
                     res.render('signUp', {title: 'Tutor-A', form: req.body, error: error});
             }
 
+        });
+    },
+    profil: function (req, res, next) {
+        Client.findOne({'email': req.session.email}, function (err, client) {
+            if (client)
+                Address.findOne({'_id': client.addressID}, function (err, address) {
+                    if (address)
+                        res.render('client/profil', {title: 'Tutor-A', client: client, address: address});
+                });
         });
     }
 
