@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    if error
+        - for (k in error)
+            h2= error[k]
+
+    form(action='/sign-up' method='post')
+        p firstname
+        input(name='firstName' value=form.firstName)
+        input(name='lastName' value=form.lastName)
+        input(name='email' value=form.email)
+        p pass
+        input(name='password')
+        input(name='confirmPass')
+        input(name='age' value=form.age)
+        p address
+        input(name='road' value=form.road)
+        input(name='postalCode' value=form.postalCode)
+        input(name='city' value=form.city)
+        input(name='country' value=form.country)
+        button(name='submit') valider
