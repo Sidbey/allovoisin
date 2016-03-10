@@ -10,7 +10,13 @@ var schema = new Schema({
     lastName: {type: String, required: true},
     age: {type: Number, required: true},
     isTutor: {type: Boolean, default: false},
-    addressID: {type: Schema.Types.ObjectId, required: true}
+
+    road: {type: String, required: true},
+    postalCode: {type: Number, required: true},
+    city: {type: String, required: true},
+    country: {type: String, required: true},
+    latitude: {type: Number, required: true},
+    longitude: {type: Number, required: true}
 });
 
 //Appelé avant d'effectuer la sauvegarde d'un utilisateur

@@ -1,9 +1,7 @@
 require('../models/Client');
-require('../models/Address');
 
 var mongoose = require('mongoose'),
     Client = mongoose.model('Client'),
-    Address = mongoose.model('Address'),
     https = require('https');
 
 
@@ -14,10 +12,13 @@ function isNotNumber(input) {
     var regexNumber = /^\d+$/;
     return input === undefined || !regexNumber.test(input);
 }
-function isBadValue(req) {
+function isValidEmail(email) {
     var regexEmail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z]+)|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
-    return isEmpty(req.body.firstName) || isEmpty(req.body.lastName) || !regexEmail.test(req.body.email)
+    return !regexEmail.test(email);
+}
+function isBadValue(req) {
+    return isEmpty(req.body.firstName) || isEmpty(req.body.lastName) || isValidEmail(req.body.email)
         || isEmpty(req.body.password) || isNotNumber(req.body.age)
         || isEmpty(req.body.road) || isNotNumber(req.body.postalCode) || isEmpty(req.body.city) || isEmpty(req.body.country);
 }
@@ -78,10 +79,10 @@ var Clients = {
 
             // API key :  AIzaSyA2Uh8w2_q63RDbAkyXrL6VauMCVc0_slU
             var datasMaps = "";
-            var addressInline = req.body.road + ", " + req.body.postalCode + " " + req.body.city + ", " + req.body.country;
+            var address = req.body.road + ", " + req.body.postalCode + " " + req.body.city + ", " + req.body.country;
             var options = {
                 host: "maps.googleapis.com",
-                path: '/maps/api/geocode/json?address=' + addressInline.replace(/\s/g, "+") + '&key=AIzaSyBh-ZMhtx_g97Xs2ZLBryqd8ldApqo_veI'
+                path: '/maps/api/geocode/json?address=' + address.replace(/\s/g, "+") + '&key=AIzaSyBh-ZMhtx_g97Xs2ZLBryqd8ldApqo_veI'
             };
             https.get(options, function (res) {
                 res.setEncoding('utf8');
@@ -103,25 +104,19 @@ var Clients = {
                     var addressComponents = datasMaps.results[0].address_components;
                     var coordinates = datasMaps.results[0].geometry.location;
 
-                    var address = new Address({
-                        road: addressComponents[0].long_name + " " + addressComponents[1].long_name,
-                        postalCode: parseInt(addressComponents[6].long_name, 10),
-                        city: addressComponents[2].long_name,
-                        country: addressComponents[5].long_name,
-                        latitude: coordinates.lat,
-                        longitude: coordinates.lng
-                    });
-                    address.save(function (err) {
-                        if (err) throw err;
-                    });
-
                     var client = new Client({
                         email: req.body.email,
                         password: req.body.password,
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
                         age: parseInt(req.body.age, 10),
-                        addressID: address._id
+
+                        road: addressComponents[0].long_name + " " + addressComponents[1].long_name,
+                        postalCode: parseInt(addressComponents[6].long_name, 10),
+                        city: addressComponents[2].long_name,
+                        country: addressComponents[5].long_name,
+                        latitude: coordinates.lat,
+                        longitude: coordinates.lng
                     });
                     client.save(function (err) {
                         if (err) throw err;
@@ -132,14 +127,6 @@ var Clients = {
                     res.redirect('/client/profil');
 
                     console.log(address);
-                    //Client.findOne({'email': 'a@a.fr'}, function (err, cl) {
-                    //    if (cl) {
-                    //        console.log(cl);
-                    //        Address.findOne({'_id': cl.addressID}, function (err, ad) {
-                    //            console.log(ad);
-                    //        });
-                    //    }
-                    //});
                 } else
                     res.render('signUp', {title: 'Tutor-A', form: req.body, error: error});
             }
@@ -149,10 +136,21 @@ var Clients = {
     profil: function (req, res, next) {
         Client.findOne({'email': req.session.email}, function (err, client) {
             if (client)
-                Address.findOne({'_id': client.addressID}, function (err, address) {
-                    if (address)
-                        res.render('client/profil', {title: 'Tutor-A', client: client, address: address});
-                });
+                res.render('client/profil', {title: 'Tutor-A', client: client});
+        });
+    },
+    editProfil: function (req, res, next) {
+        Client.findOne({'email': req.session.email}, function (err, client) {
+            if (req.method == 'POST') {
+                res.render('client/editProfil', {title: 'Tutor-A', client: client});
+            } else {
+                if (client) {
+                    if (!isEmpty(req.body.firstName))
+                        client.firstName = req.body.firstName;
+
+                    res.redirect('/client/profil');
+                }
+            }
         });
     }
 
