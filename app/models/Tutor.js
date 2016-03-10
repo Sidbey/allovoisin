@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var schema = new Schema({
-    specialtiesID: {type: [Number]},
+    specialtiesID: {type: [Schema.Types.ObjectId]},
     note: {type: Number, default: 0},
     nbHour: {type: Number, default: 0}
 });

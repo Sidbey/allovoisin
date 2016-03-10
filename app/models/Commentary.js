@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var schema = new Schema({
     contents: {type: String, required: true},
     note: {type: Number, required: true},
-    authorID: {type: Number, required: true}
+    authorID: {type: Schema.Types.ObjectId, required: true}
 });
 
 exports.model = mongoose.model('Message', schema, 'Messages');

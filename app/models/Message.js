@@ -3,8 +3,8 @@ var mongoose = require('mongoose'),
 
 var schema = new Schema({
     contents: {type: String, required: true},
-    senderID: {type: Number, required: true},
-    receiverID: {type: Number, required: true}
+    senderID: {type: Schema.Types.ObjectId, required: true},
+    receiverID: {type: Schema.Types.ObjectId, required: true}
 });
 
 exports.model = mongoose.model('Message', schema, 'Messages');
