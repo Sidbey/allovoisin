@@ -1,68 +1,50 @@
 extends layout
 
 block content
-  #carousel-example-generic.carousel.slide(data-ride='carousel')
-    // Indicators
-    ol.carousel-indicators
-      li.active(data-target='#carousel-example-generic', data-slide-to='0')
-      li(data-target='#carousel-example-generic', data-slide-to='1')
-    // Wrapper for slides
-    .carousel-inner(role='listbox')
-      .item.active
-        img(src='images/prototiptop.png')
-        .carousel-caption
-          | Premiere image
-      .item
-        img(src='images/prototiptop.png')
-        .carousel-caption
-          | Deuxieme image
-    // Controls
-    a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
-      span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
-      span.sr-only Previous
-    a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
-      span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
-      span.sr-only Next
-  br
-  div.recherche
-      input.recherche(type="text" placeholder="Rechercher un tuteur par nom")
-      p.recherche Recherche par matière :
-      form.recherche
-          select(name='nom', size='1')
-              option
-                  | Français
-              option
-                  | Anglais
-              option
-                  | Mathématiques
-              option
-                  | SVT
-              option
-                  | Physique
-              option
-                  | Chimie
-      button Recherche
-  br
-  br
-  .section-test
-      .container-fluid.presentation
-        .row
-          .col-sm-12
-            a#presentation
-            h2.text-center Présentation
-            |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quisquam asperiores provident ipsa illum delectus quam quo earum aut tempora ipsam ducimus nam facere aliquam, consequuntur, hic quos saepe fugit?
-        .row
-          .col-sm-6
-            a#projet.anchor
-            h2.text-center Projets
-            |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
-            br
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star-empty
-          .col-sm-6
-            a#etudes
-            h2.text-center Études
-            |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
+
+    img.backgound(src='/images/Teacher.jpg', alt='')
+    br
+    br
+    #section_2
+        div.recherche
+            input.recherche(type="text" placeholder="Rechercher un tuteur par nom")
+            p.recherche Recherche par matière :
+            form.recherche
+                select(name='nom', size='1')
+                    option
+                        | Français
+                    option
+                        | Anglais
+                    option
+                        | Mathématiques
+                    option
+                        | SVT
+                    option
+                        | Physique
+                    option
+                        | Chimie
+            button Recherche
+        br
+        br
+        .section-test
+            .container-fluid.presentation
+                .row
+                    .col-sm-12
+                        a#presentation
+                        h2.text-center Présentation
+                        |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quisquam asperiores provident ipsa illum delectus quam quo earum aut tempora ipsam ducimus nam facere aliquam, consequuntur, hic quos saepe fugit?
+                .row
+                    .col-sm-6
+                        a#projet.anchor
+                        h2.text-center Projets
+                        |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
+                        br
+                        i.glyphicon.glyphicon-star
+                        i.glyphicon.glyphicon-star
+                        i.glyphicon.glyphicon-star
+                        i.glyphicon.glyphicon-star
+                        i.glyphicon.glyphicon-star-empty
+                    .col-sm-6
+                        a#etudes
+                        h2.text-center Études
+                        |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.

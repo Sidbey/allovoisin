@@ -8,6 +8,10 @@ router.get('/', function (req, res, next) {
 });
 // GET/POST connection page
 router.get('/sign-in', function(req, res, next) {
+    if (req.session.isAuthenticated) {
+        res.redirect('/?error=alreadyConnected');
+        return;
+    }
     res.render('signIn', {title: 'Tutor-A', form: {email: ""}});
 });
 router.post('/sign-in', client.signIn);
@@ -15,6 +19,10 @@ router.post('/sign-in', client.signIn);
 router.get('/sign-out', client.signOut);
 // GET/POST inscription page
 router.get('/sign-up', function(req, res, next) {
+    if (req.session.isAuthenticated) {
+        res.redirect('/?error=alreadyConnected');
+        return;
+    }
    res.render('signUp', {title: 'Tutor-A', form: {firsName: "", lastName: "", email: "", age: "", road: "", postalCode: "", city: "", country: ""}})
 });
 router.post('/sign-up', client.signUp);
