@@ -2,18 +2,51 @@ extends ../layout
 
 block content
 
-    form(action='/client/edit-profil' method='post')
-        p name
-        input(name='firstName')
-        input(name='lastName')
-        input(name='email')
-        p pass
-        input(name='password')
-        input(name='confirmPass')
-        input(name='age')
-        p address
-        input(name='road')
-        input(name='postalCode')
-        input(name='city')
-        input(name='country')
-        button(name='submit') valider
+    .container
+        #Inscription.container
+            form.form-horizontal(action='/client/edit-profil' method='post')
+                h2 Edition du profil
+
+                .form-group
+                    label.col-sm-3.control-label(for='firstName') Nom
+                    .col-sm-9
+                        input#firstName.form-control(name='lastName', type='text', placeholder='Nom', autofocus='')
+                .form-group
+                    label.col-sm-3.control-label(for='firstName') Prénom
+                    .col-sm-9
+                        input#firstName.form-control(name='firstName', type='text', placeholder='Prénom', autofocus='')
+                .form-group
+                    label.col-sm-3.control-label(for='email') Adresse Postale
+                    .col-sm-9
+                        input#email.form-control(name='road', type='text', placeholder='Rue')
+                        input#email.form-control(name='city', type='text', placeholder='Ville')
+                        input#email.form-control(name='country', type='text', placeholder='Pays')
+                .form-group
+                    label.col-sm-3.control-label(for='password') Mot de passe
+                    .col-sm-9
+                        input#password.form-control(name='password', type='password', placeholder='Mot de passe')
+                .form-group
+                    label.col-sm-3.control-label(for='password') Confirmation Mot de passe
+                    .col-sm-9
+                        input#password.form-control(name='confirmPass', type='password', placeholder='Mot de passe')
+                .form-group
+                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Age
+                    .col-sm-9
+                        input#birthDate.form-control(name='age', type='number')
+                .form-group
+                    label.control-label.col-sm-3 Genre
+                    .col-sm-6
+                        .row
+                            .col-sm-4
+                                label.radio-inline
+                                    input#femaleRadio(type='radio' value='Female')
+                                |    Femme
+                            .col-sm-4
+                                label.radio-inline
+                                    input#maleRadio(type='radio' value='Male')
+                                |    Homme
+                        br
+                .form-group
+                    .col-sm-9.col-sm-offset-3
+                        button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
+
