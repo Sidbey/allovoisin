@@ -9,7 +9,7 @@ var schema = new Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     age: {type: Number, required: true},
-    isTutor: {type: Boolean, default: false},
+    tutorID: {type: Schema.Types.ObjectId, default: null},
 
     road: {type: String, required: true},
     postalCode: {type: Number, required: true},

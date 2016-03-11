@@ -11,7 +11,8 @@ router.use(function (req, res, next) {
 });
 
 router.get('/profil', client.profil);
-router.get('/editProfil', client.editProfil);
-router.post('/editProfil', client.editProfil);
+router.get('/edit-profil', client.editProfil);
+router.post('/edit-profil', client.editProfil);
+router.post('/tutor-upgrade', client.tutorUpgrade);
 
 module.exports = router;
