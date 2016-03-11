@@ -1,0 +1,64 @@
+extends layout
+
+block content
+    .container
+        #Inscription.container(style='display : block')
+            form.form-horizontal(role='form')
+                h2 Formulaire d'inscription
+
+            .form-group
+                label.col-sm-3.control-label(for='firstName') Nom
+
+                .col-sm-9
+                    input#firstName.form-control(type='text', placeholder='Nom', autofocus='')
+
+
+
+            .form-group
+                label.col-sm-3.control-label(for='firstName') Prénom
+
+                .col-sm-9
+                    input#firstName.form-control(type='text', placeholder='Prénom', autofocus='')
+            .form-group
+                label.col-sm-3.control-label(for='email') Adresse Mail
+
+                .col-sm-9
+                    input#email.form-control(type='email', placeholder='Adresse Mail')
+
+            .form-group
+                label.col-sm-3.control-label(for='email') Adresse Postale
+
+                .col-sm-9
+                    input#email.form-control(type='email', placeholder='Adresse Postale')
+            .form-group
+                label.col-sm-3.control-label(for='password') Mot de passe
+
+                .col-sm-9
+                    input#password.form-control(type='password', placeholder='Mot de passe')
+
+            .form-group
+                label.col-sm-3.control-label(for='birthDate', placeholder='jj/mm/aaaa') Date de Naissance
+
+                .col-sm-9
+                    input#birthDate.form-control(type='date')
+
+            .form-group
+                label.control-label.col-sm-3 Genre
+
+                .col-sm-6
+                    .row
+                        .col-sm-4
+                            label.radio-inline
+                                input#femaleRadio(type='radio' value='Female')
+                            |    Femme
+
+
+                        .col-sm-4
+                            label.radio-inline
+                                input#maleRadio(type='radio' value='Male')
+                            |    Homme
+                    br
+
+            .form-group
+                .col-sm-9.col-sm-offset-3
+                    button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
