@@ -25,7 +25,7 @@ function isValidEmail(email) {
 function isBadValue(req) {
     return isEmpty(req.body.firstName) || isEmpty(req.body.lastName) || isValidEmail(req.body.email)
         || isEmpty(req.body.password) || isNotNumber(req.body.age)
-        || isEmpty(req.body.road) || isNotNumber(req.body.postalCode) || isEmpty(req.body.city) || isEmpty(req.body.country);
+        || isEmpty(req.body.road) || /*isNotNumber(req.body.postalCode) ||*/ isEmpty(req.body.city) || isEmpty(req.body.country);
 }
 var Clients = {
 
@@ -36,6 +36,10 @@ var Clients = {
         });
     },
     signIn: function (req, res, next) {//POST Request
+        if (req.session.isAuthenticated) {
+            res.redirect('/?error=alreadyConnected');
+            return;
+        }
         Client.findOne({'email': req.body.email}, function (err, client) {
             if (err) throw (err);
             var error = [];
@@ -68,6 +72,10 @@ var Clients = {
         res.redirect('/');
     },
     signUp: function (req, res, next) {
+        if (req.session.isAuthenticated) {
+            res.redirect('/?error=alreadyConnected');
+            return;
+        }
         Client.findOne({'email': req.body.email}, function (err, clientInBase) {
             var error = [];
             if (clientInBase) {
@@ -84,7 +92,7 @@ var Clients = {
 
             var searchAddressOnMaps = new Promise(function (saveInBase) {
                 var datasMaps = "";
-                var address = req.body.road + ", " + req.body.postalCode + " " + req.body.city + ", " + req.body.country;
+                var address = req.body.road + ", " +/* req.body.postalCode + " " +*/ req.body.city + ", " + req.body.country;
                 var options = {
                     host: "maps.googleapis.com",
                     path: '/maps/api/geocode/json?address=' + address.replace(/\s/g, "+") + '&key=AIzaSyBh-ZMhtx_g97Xs2ZLBryqd8ldApqo_veI'
