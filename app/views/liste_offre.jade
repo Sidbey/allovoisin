@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    - for (k in offers)
+        h3 Nom du tuteur : #{offers[k].lastName}
+        h2= offers[k].prix

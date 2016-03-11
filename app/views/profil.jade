@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    nav
+        ul
+            li
+                a(href='index.html') Accueil
+            li
+                a(href='modif_profil.html') Modifier le profil
+            li
+                a
+                    button.droite Se déconnecter
+            // <li><a href="test2">Test2</a></li>
+    div
+    div
+        strong
+            div Profil
+        br
+        .roundedImage.center
+            img(src='/images/bonhomme.jpg', alt='Perso', style='width:80px;height:80px;')
+        form
+            p
+                | Nom:
+            p
+                | Prénom:
+            p
+                | Adresse:
+            p
+                | Code postal:
+            p
+                | Pays:
+            p
+                | Mot de passe:
+            .align-center
+                | Matière(s) supervisée(s):
+            br
+            p
+                | Description:
+                br
