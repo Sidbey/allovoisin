@@ -9,3 +9,9 @@ block content
     p= client.city
     br
     p= client
+
+    if client.tutorID
+        p Vous êtes tuteur
+    else
+        p Vous êtes client
+        a.btn.btn-primary(href='/client/tutor-upgrade') Devenir Tuteur

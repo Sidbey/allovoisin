@@ -2,17 +2,16 @@ var express = require('express');
 var router = express.Router();
 var client = require('../controllers/Clients');
 
-router.use(function (req, res, next) {
-    if (req.session.isAuthenticated === undefined || req.session.isAuthenticated === false) {
-        res.redirect('/?error=notLogged');
-    } else {
+function isClient(req, res, next) {
+    if (req.session.isAuthenticated === true)
         next();
-    }
-});
+    else
+        res.redirect('/?error=notLogged');
+}
 
-router.get('/profil', client.profil);
-router.get('/edit-profil', client.editProfil);
-router.post('/edit-profil', client.editProfil);
-router.post('/tutor-upgrade', client.tutorUpgrade);
+router.get('/profil', isClient, client.profil);
+router.get('/edit-profil', isClient, client.editProfil);
+router.post('/edit-profil', isClient, client.editProfil);
+router.get('/tutor-upgrade', isClient, client.tutorUpgrade);
 
 module.exports = router;

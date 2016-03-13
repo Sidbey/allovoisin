@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+    if offers
+        table.table.table-striped.table-bordered
+            - for (var k in offers)
+                tr
+                    td= offers[k].name
+                    td= offers[k].matter.toUpperCase()
+                    td= offers[k].level
+                    td= offers[k].price + " €"
