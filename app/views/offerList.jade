@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    if offers
+        table.table.table-striped.table-bordered
+            - for (var k in offers)
+                tr
+                    td= offers[k].name
+                    td= offers[k].matter.toUpperCase()
+                    td= offers[k].level
+                    td= offers[k].price + " €"
+                    td
+                        a(href="/tutor/"+offers[k].tutor._id)= offers[k].tutor.firstName
+                    td= offers[k].tutor.road
+                    if sess.isAuthenticated
+                        td= offers[k].tutor.distance + " m"
+                        td
+                            button.btn.btn-default() Valider
+

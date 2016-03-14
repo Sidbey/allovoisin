@@ -62,7 +62,7 @@ var Clients = {
                 });
                 checkLogin.then(function () {
                     if (error.length != 0) {
-                        res.render('signIn', {title: 'Tutor-A', form: req.body, error: error});
+                        res.render('signIn', {title: 'Tutor-A', form: req.body, error: error, sess: req.session});
                     }
                 });
             });
@@ -148,7 +148,7 @@ var Clients = {
 
                         console.log(address);
                     } else
-                        res.render('signUp', {title: 'Tutor-A', form: req.body, error: error});
+                        res.render('signUp', {title: 'Tutor-A', form: req.body, error: error, sess: req.session});
                 });
 
             });
@@ -156,13 +156,13 @@ var Clients = {
         profil: function (req, res, next) { // GET Request
             Client.findById(req.session.clientID, function (err, client) {
                 if (client)
-                    res.render('client/profil', {title: 'Tutor-A', client: client});
+                    res.render('client/profil', {title: 'Tutor-A', client: client, sess: req.session});
             });
         },
         editProfil: function (req, res, next) {
             Client.findById(req.session.clientID, function (err, client) {
                 if (req.method == 'GET') {
-                    res.render('client/editProfil', {title: 'Tutor-A', client: client});
+                    res.render('client/editProfil', {title: 'Tutor-A', client: client, sess: req.session});
                 } else if (req.method == 'POST') {
                     var inputIsUpdate = new Promise(function (render) {
                             if (client) {
@@ -234,7 +234,7 @@ var Clients = {
                     req.session.isTutor = true;
 
                 }
-                res.render('client/profil', {title: 'Tutor-A', client: client});
+                res.render('client/profil', {title: 'Tutor-A', client: client, sess: req.session});
             });
         }
 

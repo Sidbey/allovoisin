@@ -13,14 +13,6 @@ function isNumber(input) {
     return input != undefined && regexNumber.test(input);
 }
 function isBadValue(req) {
-    console.log("BAD VALUE");
-    console.log(isEmpty((req.body.name)));
-    console.log(isEmpty((req.body.matter)));
-    console.log(isEmpty((req.body.level)));
-    console.log(isEmpty((req.body.plageHoraire)));
-    console.log(isEmpty((req.body.plageJournaliere)));
-    console.log(isNumber((req.body.nbHour)));
-    console.log(isNumber((req.body.price)));
     return isEmpty(req.body.name) || isEmpty(req.body.matter) || isEmpty(req.body.level)
         || !isNumber(req.body.nbHour) || isEmpty(req.body.plageHoraire)
         || isEmpty(req.body.plageJournaliere) || !isNumber(req.body.price);
@@ -29,17 +21,52 @@ function isBadValue(req) {
 var Offers = {
 
     index: function (req, res) {
-        Offer.find({}, function (err) {
-            if (err) throw err;
-
-        });
-    },
-    tutorDashboard: function (req, res, next) {
-        Client.findById(req.session.clientID, function (err, client) {
-            Offer.find({tutorID: client.tutorID}, function (err, offers) {
-                res.render('tutor/dashboard', {title: 'Tutor-A', offers: offers});
+        if (!req.session.isAuthenticated) {
+            Offer.find({}, function (err, offers) {
+                var promise = new Promise(function (end) {
+                    var i = 0;
+                    for (var k in offers) {
+                        Client.findOne({tutorID: offers[k].tutorID}, function (err, tutor) {
+                            offers[i]['tutor'] = tutor;
+                            if (i++ == k) {
+                                end();
+                            }
+                        });
+                    }
+                });
+                promise.then(function () {
+                    res.render('offerList', {title: 'Tutor-A', offers: offers, sess: req.session});
+                });
             });
-        });
+        } else {
+            Client.findById(req.session.clientID, function (err, client) {
+                Offer.find({}, function (err, offers) {
+                    var promise = new Promise(function (end) {
+                        var i = 0;
+                        for (var k in offers) {
+                            Client.findOne({tutorID: offers[k].tutorID}, function (err, tutor) {
+                                var rlat1 = Math.PI * client.latitude / 180;
+                                var rlat2 = Math.PI * tutor.latitude / 180;
+                                var rtheta = Math.PI * (client.longitude - tutor.longitude) / 180;
+
+                                var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
+                                dist = Math.acos(dist) * 180 / Math.PI * 111189.57696;
+
+                                offers[i]['tutor'] = tutor;
+                                offers[i].tutor['distance'] = Math.round(dist);
+                                if (i++ == k) {
+                                    end();
+                                }
+                            });
+                        }
+                    });
+                    promise.then(function () {
+                        res.render('offerList', {title: 'Tutor-A', offers: offers, sess: req.session});
+                    });
+                });
+            });
+
+        }
     },
     newOffer: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
@@ -49,7 +76,7 @@ var Offers = {
                         title: 'Tutor-A', form: {
                             name: "", description: "", matter: "", level: "",
                             nbHour: "", plageHoraire: "", plageJournaliere: "", price: ""
-                        }
+                        }, sess: req.session
                     });
             } else if (req.method == 'POST') {
                 console.log(typeof req.body.nbHour);
@@ -76,7 +103,7 @@ var Offers = {
                     });
                     res.redirect('/tutor/dashboard');
                 } else
-                    res.render('tutor/newOffer', {title: 'Tutor-A', form: req.body, error: error});
+                    res.render('tutor/newOffer', {title: 'Tutor-A', form: req.body, error: error, sess: req.session});
             }
         });
 
@@ -85,7 +112,7 @@ var Offers = {
     editOffer: function (req, res, next) {
         Offer.findOne({'id': req.params._id}, function (err, offer) {
             if (req.method == 'GET') {
-                res.render('tutor/editOffer', {title: 'Tutor-A', offer: offer});
+                res.render('tutor/editOffer', {title: 'Tutor-A', offer: offer, sess: req.session});
             } else {
                 if (req.method == 'POST') {
                     offer.update({

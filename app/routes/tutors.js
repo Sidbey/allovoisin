@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var tutor = require('../controllers/Tutors');
 var offer = require('../controllers/Offers');
 
 function isTutor(req, res, next) {
@@ -12,9 +13,11 @@ function isTutor(req, res, next) {
         res.redirect('/?error=notLogged');
 }
 
-router.get('/dashboard', isTutor, offer.tutorDashboard);
+router.get('/dashboard', isTutor, tutor.dashboard);
 router.get('/new-offer', isTutor, offer.newOffer);
 router.post('/new-offer', isTutor, offer.newOffer);
+
+router.get('/:id', tutor.publicProfil);
 
 
 module.exports = router;
