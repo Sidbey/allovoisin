@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+    if error
+        - for (var k in error)
+            div.bg-danger
+                h3 #{error[k]}
+
+    .container
+        #Inscription.container
+            form.form-horizontal(action='/tutor/new-offer' method='post')
+                h2 Nouvelle Offre
+
+                .form-group
+                    label.col-sm-3.control-label(for='firstName') Nom
+                    .col-sm-9
+                        input#firstName.form-control(name='name', value=form.name, type='text', placeholder='Nom', autofocus='')
+                .form-group
+                    label.col-sm-3.control-label(for='firstName') Description
+                    .col-sm-9
+                        input#firstName.form-control(name='description', value=form.description, type='text', placeholder='Prénom', autofocus='')
+                .form-group
+                    label.col-sm-3.control-label(for='email') Matiere
+                    .col-sm-9
+                        input#email.form-control(name='matter', value=form.matter, type='text', placeholder='Adresse Mail')
+                .form-group
+                    label.col-sm-3.control-label(for='address') Niveau
+                    .col-sm-9
+                        input#address.form-control(name='level', value=form.level, type='text', placeholder='Rue')
+                .form-group
+                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Nombre d'heure
+                    .col-sm-9
+                        input#birthDate.form-control(name='nbHour', value=form.nbHour, type='number')
+                .form-group
+                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Nombre d'heure
+                    .col-sm-9
+                        input#birthDate.form-control(name='plageHoraire', value=form.plageHoraire, type='text')
+                        input#birthDate.form-control(name='plageJournaliere', value=form.plageJournaliere, type='text')
+                        input#birthDate.form-control(name='price', value=form.price, type='number')
+                .form-group
+                    .col-sm-9.col-sm-offset-3
+                        button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire

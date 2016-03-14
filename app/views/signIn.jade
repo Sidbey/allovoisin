@@ -2,14 +2,16 @@ extends  layout
 
 block content
     if error
-        - for (k in error)
-        h2= error[k]
+        - for (var k in error)
+            div.bg-danger
+                h3 #{error[k]}
+
 
     form(action='/sign-in' method='post')
         p
             | Email:
             br
-            input.roundedinput(name='email', value=form.email, type='text', placeholder='Email', required='')
+            input.roundedinput(name='email', value=form.email, type='text', placeholder='Email', required='', autofocus='')
         p
             | Password:
             br

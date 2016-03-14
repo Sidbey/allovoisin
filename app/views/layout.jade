@@ -6,6 +6,7 @@ html
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
     body
+        input(type="hidden", name="_csrf", value=csrf)
 
         #display_navigation
 
@@ -24,12 +25,16 @@ html
                         ul.nav.navbar-nav
                             li
                                 a(href='/') Tutor-A
-                            li#right_2
+                            li#right
                                 a(href='/sign-up') S'inscrire
                             li#right
                                 a(href='/sign-in') Se Connecter
                             li#right
                                 a(href='/sign-out') Se Déconnecter
+                            li#right
+                                a(href='/offers') Offres
+                            li#right
+                                a(href='/tutor/dashboard') DB
 
 
         block content
