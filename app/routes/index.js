@@ -18,6 +18,12 @@ router.get('/sign-up', function(req, res, next) {
    res.render('signUp', {title: 'Tutor-A', form: {firsName: "", lastName: "", email: "", age: "", road: "", postalCode: "", city: "", country: ""}})
 });
 router.post('/sign-up', client.signUp);
+router.get('/signUpStudent', function (req, res, next) {
+    res.render('signUpStudent', {title: 'Tutor-A'});
+});
+router.get('/signUpTutors', function (req, res, next) {
+    res.render('signUpTutors', {title: 'Tutor-A'});
+});
 
 router.get('/tuteurs', function (req, res, next) {
     res.render('tuteurs', {title: 'Tutor-A'});

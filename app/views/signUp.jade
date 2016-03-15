@@ -1,25 +1,41 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
-
     if error
         - for (k in error)
             h2= error[k]
-
-    form(action='/sign-up' method='post')
-        p firstname
-        input(name='firstName' value=form.firstName)
-        input(name='lastName' value=form.lastName)
-        input(name='email' value=form.email)
-        p pass
-        input(name='password')
-        input(name='confirmPass')
-        input(name='age' value=form.age)
-        p address
-        input(name='road' value=form.road)
-        input(name='postalCode' value=form.postalCode)
-        input(name='city' value=form.city)
-        input(name='country' value=form.country)
-        button(name='submit') valider
+    body#page-top.color
+        nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix-top
+            .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a.page-scroll.btn-tertiary(href='/') Accueil
+                        li
+                            a.page-scroll.btn-tertiary(href='#services') Nos offres
+                        li
+                            a.page-scroll.btn-tertiary(href='#portfolio') Nous contacter
+    br
+    br
+    br
+    br
+    div.centrage
+        p S'inscrire:
+            br
+            br
+            br
+            button.btn.btn-primary.centrage
+                a(href='/signUpStudent')
+                    | Elève
+            button.btn.btn-primary.centrage
+                a(href='/signUpTutors')
+                    | Tuteur

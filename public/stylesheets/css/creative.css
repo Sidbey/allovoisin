@@ -420,6 +420,18 @@ fieldset[disabled] .btn-default.active {
     -moz-transition: all .35s;
     transition: all .35s;
 }
+.btn-tertiary {
+    border-color: darkorange;
+    border-radius: 500px;
+    border: 5px;
+    color: black !important;
+    background-color: transparent;
+    padding: 5 5 5 5;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
 
 .btn-primary:hover,
 .btn-primary:focus,
@@ -513,3 +525,10 @@ body {
 .color{
     background-color: #EEEEEE;
 }
+
+.centrer{
+    width: 900px;
+    margin: 0 auto;
+    max-width: 65%;
+}
+
