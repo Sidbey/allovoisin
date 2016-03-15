@@ -1,11 +1,18 @@
+mixin promptName(firstName, lastName)
+    span= firstName[0].toUpperCase() + firstName.substring(1).toLowerCase() + " " + lastName[0].toUpperCase() + lastName.substring(1).toLowerCase()
+
 extends ../layout
 
 block content
+    h2
+        +promptName(tutor.firstName, tutor.lastName)
     if offers
         table.table.table-striped.table-bordered
-            - for (var k in offers)
+            each offer in offers
                 tr
-                    td= offers[k].name
-                    td= offers[k].matter.toUpperCase()
-                    td= offers[k].level
-                    td= offers[k].price + " €"
+                    td= offer.name
+                    td= offer.matter.toUpperCase()
+                    td= offer.level
+                    td= offer.price + " €"
+
+

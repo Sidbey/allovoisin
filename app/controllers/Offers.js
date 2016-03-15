@@ -12,8 +12,12 @@ function isNumber(input) {
     var regexNumber = /^\d+$/;
     return input != undefined && regexNumber.test(input);
 }
+function isMatter(matter) {
+    matterList = ['Français', 'Maths', 'Physique', 'Chimie', 'SVT', 'Anglais'];
+    return matterList.indexOf(matter) != -1;
+}
 function isBadValue(req) {
-    return isEmpty(req.body.name) || isEmpty(req.body.matter) || isEmpty(req.body.level)
+    return isEmpty(req.body.name) || !isMatter(req.body.matter) || isEmpty(req.body.level)
         || !isNumber(req.body.nbHour) || isEmpty(req.body.plageHoraire)
         || isEmpty(req.body.plageJournaliere) || !isNumber(req.body.price);
 }
@@ -110,7 +114,7 @@ var Offers = {
     },
 
     editOffer: function (req, res, next) {
-        Offer.findOne({'id': req.params._id}, function (err, offer) {
+        Offer.findById(req.params.id, function (err, offer) {
             if (req.method == 'GET') {
                 res.render('tutor/editOffer', {title: 'Tutor-A', offer: offer, sess: req.session});
             } else {

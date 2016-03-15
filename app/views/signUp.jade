@@ -9,6 +9,7 @@ block content
     .container
         #Inscription.container
             form.form-horizontal(action='/sign-up' method='post')
+                input(type="hidden", name="_csrf", value=csrf)
                 h2 Formulaire d'inscription
 
                 .form-group

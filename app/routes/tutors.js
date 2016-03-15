@@ -8,9 +8,9 @@ function isTutor(req, res, next) {
         if (req.session.isTutor === true)
             next();
         else
-            res.redirect('/?error=notTutor');
+            return res.redirect('/?error=notTutor');
     else
-        res.redirect('/?error=notLogged');
+        return res.redirect('/?error=notLogged');
 }
 
 router.get('/dashboard', isTutor, tutor.dashboard);

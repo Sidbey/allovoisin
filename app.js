@@ -25,15 +25,21 @@ app.use(session({
 }));
 
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(require('less-middleware')(path.join(__dirname, 'public')));
+app.use(require('less-middleware')(
+    path.join(__dirname, 'sources'), {
+        dest: path.join(__dirname, 'public')
+    }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(csrf());
+app.use(function (req, res, next) {
+    res.locals.csrf = req.csrfToken();
+    next();
+});
 
 app.use('/', routes);
 app.use('/client', clients);

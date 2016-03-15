@@ -9,6 +9,7 @@ block content
     .container
         #Inscription.container
             form.form-horizontal(action='/tutor/new-offer' method='post')
+                input(type="hidden", name="_csrf", value=csrf)
                 h2 Nouvelle Offre
 
                 .form-group
