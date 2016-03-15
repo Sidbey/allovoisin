@@ -1,173 +1,170 @@
 extends layout
 
 block content
-  #display_navigation.collapse
+    body#page-top
+        nav#mainNav.navbar.navbar-default.navbar-fixed-top
+            .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a.page-scroll(href='#about') Accueil
+                        li
+                            a.page-scroll(href='#services') Nos offres
+                        li
+                            a.page-scroll(href='#portfolio') Nous contacter
+                        li
+                            a.page-scroll.btn.btn-secondary(href='#contact') S'inscrire
+                        li
+                            a.page-scroll.btn.btn-primary(href='#contact') Se connecter
+                // /.navbar-collapse
+            // /.container-fluid
+        header
+            .header-content
+                .header-content-inner
+                    ul.list-inline
+                        li
+                            a.btn.btn-primary.btn-xl.page-scroll(href='#about') Rechercher un tuteur
+                        li
+                            a.btn.btn-primary.btn-xl.page-scroll(href='#about') Recherche par matière
+        section#about.bg-primary
+            .container
+                .row
+                    .col-lg-8.col-lg-offset-2.text-center
+                        h2.section-heading
+                        hr.light
+                        p.text-faded
+                            | Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
+                        a.btn.btn-default.btn-xl(href='#') Get Started!
+        section#services
+            .container
+                .row
+                    .col-lg-12.text-center
+                        h2.section-heading At Your Service
+                        hr.primary
+            .container
+                .row
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-diamond.wow.bounceIn.text-primary
+                            h3 Sturdy Templates
+                            p.text-muted Our templates are updated regularly so they don't break.
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-paper-plane.wow.bounceIn.text-primary(data-wow-delay='.1s')
+                            h3 Ready to Ship
+                            p.text-muted You can use this theme as is, or you can make changes!
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-newspaper-o.wow.bounceIn.text-primary(data-wow-delay='.2s')
+                            h3 Up to Date
+                            p.text-muted We update dependencies to keep things fresh.
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-heart.wow.bounceIn.text-primary(data-wow-delay='.3s')
+                            h3 Made with Love
+                            p.text-muted You have to make your websites with love these days!
+        section#portfolio.no-padding
+            .container-fluid
+                .row.no-gutter
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/1.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/2.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/3.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/4.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/5.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/6.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+        aside.bg-dark
+            .container.text-center
+                .call-to-action
+                    h2 Free Download at Start Bootstrap!
+                    a.btn.btn-default.btn-xl.wow.tada(href='#') Download Now!
+        section#contact
+            .container
+                .row
+                    .col-lg-8.col-lg-offset-2.text-center
+                        h2.section-heading Let's Get In Touch!
+                        hr.primary
+                        p
+                            | Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
+                    .col-lg-4.col-lg-offset-2.text-center
+                        i.fa.fa-phone.fa-3x.wow.bounceIn
+                        p 123-456-6789
+                    .col-lg-4.text-center
+                        i.fa.fa-envelope-o.fa-3x.wow.bounceIn(data-wow-delay='.1s')
+                        p
+                            a(href='mailto:your-email@your-domain.com') feedback@startbootstrap.com
 
-  nav.navbar.navbar-inverse(role='navigation')
-    .container
-      // Brand and toggle get grouped for better mobile display
-      .navbar-header
-        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-          span.sr-only Toggle navigation
-
-          span.icon-bar
-
-          span.icon-bar
-
-          span.icon-bar
-
-        a.navbar-brand
-      // Collect the nav links, forms, and other content for toggling
-      #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li
-            a(href='#') Tutor-A
-
-          li#right_2
-            a(href='#' onclick="$('#Inscription').toggle();") S'inscrire
-
-          li#right
-            a(href='#' onclick="$('#Connexion').toggle();") Se Connecter
-
-
-  .container
-    #Inscription.container(style='display : none')
-      form.form-horizontal(role='form')
-        h2 Formulaire d'inscription
-
-      .form-group
-        label.col-sm-3.control-label(for='firstName') Nom
-
-        .col-sm-9
-          input#firstName.form-control(type='text', placeholder='Nom', autofocus='')
-
-
-
-      .form-group
-        label.col-sm-3.control-label(for='firstName') Prénom
-
-        .col-sm-9
-          input#firstName.form-control(type='text', placeholder='Prénom', autofocus='')
-      .form-group
-        label.col-sm-3.control-label(for='email') Adresse Mail
-
-        .col-sm-9
-          input#email.form-control(type='email', placeholder='Adresse Mail')
-
-      .form-group
-        label.col-sm-3.control-label(for='email') Adresse Postale
-
-        .col-sm-9
-          input#email.form-control(type='email', placeholder='Adresse Postale')
-      .form-group
-        label.col-sm-3.control-label(for='password') Mot de passe
-
-        .col-sm-9
-          input#password.form-control(type='password', placeholder='Mot de passe')
-
-      .form-group
-        label.col-sm-3.control-label(for='birthDate', placeholder='jj/mm/aaaa') Date de Naissance
-
-        .col-sm-9
-          input#birthDate.form-control(type='date')
-
-      .form-group
-        label.control-label.col-sm-3 Genre
-
-        .col-sm-6
-          .row
-            .col-sm-4
-              label.radio-inline
-                input#femaleRadio(type='checkbox' value='Female')
-              |  Femme
-
-
-            .col-sm-4
-              label.radio-inline
-                input#maleRadio(type='checkbox' value='Male')
-              |  Homme
-
-
-
-      .form-group
-        .col-sm-9.col-sm-offset-3
-          button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
-  .container
-      #Connexion.container(style='display : none')
-          form.form-horizontal(role='form')
-              h2 Connexion
-          .form-group
-              label.col-sm-3.control-label(for='email') Adresse Mail
-
-              .col-sm-9
-                  input#email.form-control(type='email', placeholder='Adresse Mail')
-
-              label.col-sm-3.control-label(for='password') Login
-
-              .col-sm-9
-                  input#password.form-control(type='password', placeholder='Mot de passe')
-
-              .col-sm-9.col-sm-offset-3
-                  button.btn.btn-primary.btn-block(type='submit') Connexion
-
-
-    img.backgound(src='/images/Teacher.jpg', alt='')
-  br
-  br
-  #section_2
-    div.recherche
-      input.recherche(type="text" placeholder="Rechercher un tuteur par nom")
-      p.recherche Recherche par matière :
-      form.recherche
-        select(name='nom', size='1')
-          option
-            | Français
-          option
-            | Anglais
-          option
-            | Mathématiques
-          option
-            | SVT
-          option
-            | Physique
-          option
-            | Chimie
-      button Recherche
-    br
-    br
-    .section-test
-      .container-fluid.presentation
-        .row
-          .col-sm-12
-            a#presentation
-            h2.text-center Présentation
-            |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quisquam asperiores provident ipsa illum delectus quam quo earum aut tempora ipsam ducimus nam facere aliquam, consequuntur, hic quos saepe fugit?
-        .row
-          .col-sm-6
-            a#projet.anchor
-            h2.text-center Projets
-            |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
-            br
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star
-            i.glyphicon.glyphicon-star-empty
-          .col-sm-6
-            a#etudes
-            h2.text-center Études
-            |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
-
-          script.
-              function toggle_visibility(Inscription, Connexion) {
-                  var e = document.getElementById(Inscription);
-                  var e2 = document.getElementById(Connexion);
-                  if (e.style.display == 'block') {
-                      e.style.display = 'block';
-                      e2.style.display = 'none';
-                  }
-                  else {
-                      e.style.display = 'none';
-                      e2.style.display = 'block';
-                  }
-              }
+// jQuery (necessary for Bootstrap's JavaScript plugins)
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+// Include all compiled plugins (below), or include individual files as needed
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+script(src='/js/bootstrap.js')
+script(src='/js/bootstrap.min.js')
+script(src='/js/cbpAnimatedHeader.js')
+script(src='/js/classie.js')
+script(src='/js/creative.js')
+script(src='/js/html5shiv.js')
+script(src='/js/init.js')
+script(src='/js/jquery.js')
+script(src='/js/jquery.easing.min.js')
+script(src='/js/jquery.min.js')
+script(src='/js/jquery.fittext.js')
+script(src='/js/skel.min.js')
+script(src='/js/skel-layers.min.js')
+script(src='/js/wow.min.js')

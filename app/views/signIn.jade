@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    if error
+        - for (k in error)
+            h2= error[k]
+
+    form(action='/sign-in' method='post')
+        p email
+        input(name='email' value=form.email)
+        p pass
+        input(name='password')
+        button(name='submit') valider

@@ -1,15 +1,22 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    Address = mongoose.model('Address'),
     bcrypt = require('bcrypt-nodejs'),
     SALT = 42;
 
 var schema = new Schema({
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    address: {type: Address, required: true}
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
+    age: {type: Number, required: true},
+    isTutor: {type: Boolean, default: false},
+
+    road: {type: String, required: true},
+    postalCode: {type: Number, required: true},
+    city: {type: String, required: true},
+    country: {type: String, required: true},
+    latitude: {type: Number, required: true},
+    longitude: {type: Number, required: true}
 });
 
 //Appelé avant d'effectuer la sauvegarde d'un utilisateur
@@ -21,10 +28,7 @@ schema.pre('save', function (next) {
         if (err) return next(err);
         bcrypt.hash(user.password, salt, null, function (err, hash) {
             if (err) return next(err);
-            console.log("salt = " + salt);
-            console.log("pwd = " + user.password);
             user.password = hash;
-            console.log("hash pwd = " + user.password);
             next();
         });
     });
