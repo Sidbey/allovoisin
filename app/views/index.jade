@@ -1,5 +1,136 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    body#page-top
+        nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix-top
+            .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a.page-scroll(href='/') Accueil
+                        li
+                            a.page-scroll(href='#services') Nos offres
+                        li
+                            a.page-scroll(href='#portfolio') Nous contacter
+                        li
+                            a.page-scroll.btn.btn-secondary(href='/sign-up') S'inscrire
+                        li
+                            a.page-scroll.btn.btn-primary(href='/sign-in') Se connecter
+                // /.navbar-collapse
+            // /.container-fluid
+        header
+            .header-content
+                .header-content-inner
+                    ul.list-inline
+                        li
+                            a.btn.btn-primary.btn-xl.page-scroll(href='#about') Rechercher un tuteur
+                        li
+                            a.btn.btn-primary.btn-xl.page-scroll(href='#about') Recherche par matière
+        section#about.bg-primary
+            .container
+                .row
+                    .col-lg-8.col-lg-offset-2.text-center
+                        h2.section-heading
+                        p
+                            |  Trouvez un tuteur proche de chez vous
+                        hr.light
+                        p.text-faded
+                            |  Votre enfant est en difficulté scolaire?Vous trouverez les meilleurs tuteurs proches de chez vous capable d'aider votre mioche.
+                        a.btn.btn-default.btn-xl(href='#') C'est parti!
+        section#services
+            .container
+                .row
+                    .col-lg-12.text-center
+                        h2.section-heading Qui sommes-nous?
+                        hr.primary
+            .container
+                .row
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-diamond.wow.bounceIn.text-primary
+                            h3 Sturdy Templates
+                            p.text-muted Our templates are updated regularly so they don't break.
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-paper-plane.wow.bounceIn.text-primary(data-wow-delay='.1s')
+                            h3 Ready to Ship
+                            p.text-muted You can use this theme as is, or you can make changes!
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-newspaper-o.wow.bounceIn.text-primary(data-wow-delay='.2s')
+                            h3 Up to Date
+                            p.text-muted We update dependencies to keep things fresh.
+                    .col-lg-3.col-md-6.text-center
+                        .service-box
+                            i.fa.fa-4x.fa-heart.wow.bounceIn.text-primary(data-wow-delay='.3s')
+                            h3 Made with Love
+                            p.text-muted You have to make your websites with love these days!
+        section#portfolio.no-padding
+            .container-fluid
+                .row.no-gutter
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/1.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/2.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/3.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/4.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/5.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+                    .col-lg-4.col-sm-6
+                        a.portfolio-box(href='#')
+                            img.img-responsive(src='/images/img/portfolio/6.jpg', alt='')
+                            .portfolio-box-caption
+                                .portfolio-box-caption-content
+                                    .project-category.text-faded
+                                        | Category
+                                    .project-name
+                                        | Project Name
+
+
+
