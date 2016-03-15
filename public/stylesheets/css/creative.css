@@ -4,8 +4,7 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-html,
-body {
+html,body {
     width: 100%;
     height: 100%;
 }
@@ -51,6 +50,22 @@ p {
     line-height: 1.5;
 }
 
+.format-connexion {
+    text-align: center;
+    display:block;
+    width:150px;
+}
+
+
+
+.recherche {
+    text-align: center;
+}
+
+.format-connexion {
+    text-align: center;
+}
+
 .bg-primary {
     background-color: #f05f40;
 }
@@ -90,12 +105,12 @@ aside {
     text-transform: uppercase;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-weight: 700;
-    color: #f05f40 !important;
+    color: #f05f40;
 }
 
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-    color: #eb3812 !important;
+    color: #eb3812;
 }
 
 .navbar-default .nav > li>a,
@@ -108,18 +123,18 @@ aside {
 
 .navbar-default .nav > li>a:hover,
 .navbar-default .nav>li>a:focus:hover {
-    color: #f05f40 !important;
+    color: #f05f40;
 }
 
 .navbar-default .nav > li.active>a,
 .navbar-default .nav>li.active>a:focus {
     color: #f05f40!important;
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 .navbar-default .nav > li.active>a:hover,
 .navbar-default .nav>li.active>a:focus:hover {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 @media(min-width:768px) {
@@ -487,4 +502,14 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: #222;
+}
+
+.centrage{
+    margin: 0 auto;
+    text-align:center;
+    margin-bottom: 15px;
+
+}
+.color{
+    background-color: #EEEEEE;
 }

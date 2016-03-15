@@ -2,7 +2,7 @@ extends layout
 
 block content
     body#page-top
-        nav#mainNav.navbar.navbar-default.navbar-fixed-top
+        nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix-top
             .container-fluid
                 // Brand and toggle get grouped for better mobile display
                 .navbar-header
@@ -24,7 +24,7 @@ block content
                         li
                             a.page-scroll.btn.btn-secondary(href='#contact') S'inscrire
                         li
-                            a.page-scroll.btn.btn-primary(href='#contact') Se connecter
+                            a.page-scroll.btn.btn-primary(href='/sign-in') Se connecter
                 // /.navbar-collapse
             // /.container-fluid
         header
@@ -40,6 +40,8 @@ block content
                 .row
                     .col-lg-8.col-lg-offset-2.text-center
                         h2.section-heading
+                        p
+                            |  Trouvez un tuteur proche de chez vous
                         hr.light
                         p.text-faded
                             | Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
@@ -150,21 +152,4 @@ block content
                         p
                             a(href='mailto:your-email@your-domain.com') feedback@startbootstrap.com
 
-// jQuery (necessary for Bootstrap's JavaScript plugins)
-script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-// Include all compiled plugins (below), or include individual files as needed
-script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
-script(src='/js/bootstrap.js')
-script(src='/js/bootstrap.min.js')
-script(src='/js/cbpAnimatedHeader.js')
-script(src='/js/classie.js')
-script(src='/js/creative.js')
-script(src='/js/html5shiv.js')
-script(src='/js/init.js')
-script(src='/js/jquery.js')
-script(src='/js/jquery.easing.min.js')
-script(src='/js/jquery.min.js')
-script(src='/js/jquery.fittext.js')
-script(src='/js/skel.min.js')
-script(src='/js/skel-layers.min.js')
-script(src='/js/wow.min.js')
+

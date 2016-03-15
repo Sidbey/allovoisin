@@ -4,10 +4,49 @@ block content
     if error
         - for (k in error)
             h2= error[k]
+    body#page-top.color
+        nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix-top
+            .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a.page-scroll.btn(href='#about') Accueil
+                        li
+                            a.page-scroll(href='#services') Nos offres
+                        li
+                            a.page-scroll(href='#portfolio') Nous contacter
+                        li
+                            a.page-scroll.btn.btn-secondary(href='#contact') S'inscrire
+                        li
+                            a.page-scroll.btn.btn-primary(href='/sign-in') Se connecter
+    br
+    br
+    br
+    br
+    br
+    .container
+        .row
+            .col-md-offset-5.col-md-3
+                .form-login
 
-    form(action='/sign-in' method='post')
-        p email
-        input(name='email' value=form.email)
-        p pass
-        input(name='password')
-        button(name='submit') valider
+                    h4.centrage Se connecter
+                    form
+                        input#userName.form-control.input-sm.chat-input(type='text', required='', placeholder='Entrez votre mail')
+                        br
+                        input#userPassword.form-control.input-sm.chat-input(type='text', required='', placeholder='Entrez votre mot de passe')
+                        br
+                        .wrapper
+                            span.group-btn
+                                a.btn.btn-primary.btn-md.centrage(href='#')
+                                    | Connexion
+
+                    a(href='inscription.html') Pas encore inscrit?
