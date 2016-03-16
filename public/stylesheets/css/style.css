@@ -21,7 +21,6 @@ nav {
     font-size: 1.4em;
     color : darkorange;
 }
-/*Gère la taille de l'image*/
 .section {
     background-image:url(/images/bg_accueil.jpg);
     background-size:100%;
@@ -68,6 +67,13 @@ nav {
     color:white;
     background-color: orange;
 }
+
+.button{
+    color:white;
+    background-color: orange;
+    border-radius: 10px;
+}
+
 
 /*Taille de la photo et des caractères avec un petit écran*/
 @media (max-width:767px){
@@ -121,11 +127,4 @@ nav {
     width: 900px;
     margin: 0 auto;
     max-width: 65%;
-}
-.centree{
-    position: relative;
-    width: 100%;
-    min-height: auto;
-    text-align: center;
-    padding: 10px;
 }

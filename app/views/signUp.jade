@@ -3,7 +3,7 @@ extends layout
 block content
     if error
         - for (k in error)
-            h2= error[k]
+            h3= error[k]
     body#page-top.color
         nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix-top
             .container-fluid
@@ -33,9 +33,9 @@ block content
             br
             br
             br
-            button.btn.btn-primary.centrage
+            button.button.btn.btn-primary.survol.centrage
                 a(href='/signUpStudent')
                     | Elève
-            button.btn.btn-primary.centrage
+            button.button.btn.btn-primary.survol.centrage
                 a(href='/signUpTutors')
                     | Tuteur
