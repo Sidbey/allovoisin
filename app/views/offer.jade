@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    if error
+        each err in error
+            div.bg-danger
+                h3= err
+
+    if offer
+        p= offer.name
+        p= offer.matter
+        p= offer.level
+        p= offer.price + " €"
+        a(href="/tutor/" + offer.tutor.tutorID)= offer.tutor.firstName
+        p= offer.tutor.road
+        if sess.isAuthenticated
+            p= offer.tutor.distance + " m"
+            form(action='/offer/'+offer._id, method='post')
+                input(type="hidden", name="_csrf", value=csrf)
+                input(name='date', value=form.date, type='date', placeholder='Date', autofocus='')
+                input(name='beginHour', value=form.beginHour, type='time', placeholder='Heure de début')
+                input(name='duration', value=form.duration, type='number', placeholder='Durée')
+                button.btn.btn-default Valider
+

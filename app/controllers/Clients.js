@@ -1,10 +1,14 @@
 require('../models/Client');
 require('../models/Tutor');
+require('../models/Offer');
+require('../models/OfferRequest');
 
 var mongoose = require('mongoose'),
     validator = require('validator'),
     Client = mongoose.model('Client'),
-    Tutor = mongoose.model('Tutor');
+    Tutor = mongoose.model('Tutor'),
+    Offer = mongoose.model('Offer'),
+    OfferR = mongoose.model('OfferRequest');
 
 const Geoloc = require('./utils/Geoloc');
 
@@ -57,7 +61,7 @@ var Clients = {
             });
             checkLogin.then(function () {
                 if (error.length != 0) {
-                    res.render('signIn', {title: 'Tutor-A', form: req.body, error: error, sess: req.session});
+                    res.render('signIn', {title: 'Tutor-A', form: req.body, error: error});
                 }
             });
         });
@@ -97,12 +101,11 @@ var Clients = {
                         res.redirect('/client/profil');
                     })
                     .catch(error => {
-                        console.error(error);
                         errors.push(error);
-                        res.render('signUp', {title: 'Tutor-A', form: req.body, error: errors, sess: req.session});
+                        res.render('signUp', {title: 'Tutor-A', form: req.body, error: errors});
                     });
             } else
-                res.render('signUp', {title: 'Tutor-A', form: req.body, error: errors, sess: req.session});
+                res.render('signUp', {title: 'Tutor-A', form: req.body, error: errors});
 
 
         });
@@ -110,16 +113,17 @@ var Clients = {
     profil: function (req, res, next) { // GET Request
         Client.findById(req.session.clientID, function (err, client) {
             if (client)
-                res.render('client/profil', {title: 'Tutor-A', client: client, sess: req.session});
+                res.render('client/profil', {title: 'Tutor-A', client: client});
         });
     },
     editProfil: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
             if (req.method == 'GET') {
-                res.render('client/editProfil', {title: 'Tutor-A', form: client, sess: req.session});
+                res.render('client/editProfil', {title: 'Tutor-A', form: client});
             } else if (req.method == 'POST') {
                 var form = req.body;
                 var errors = [];
+                console.log(req);
 
                 if (isBadValue(form))
                     errors.push("Un champ est incorrect ou manquant !");
@@ -141,16 +145,14 @@ var Clients = {
                             res.render('client/editProfil', {
                                 title: 'Tutor-A',
                                 form: form,
-                                error: errors,
-                                sess: req.session
+                                error: errors
                             });
                         });
                 } else
                     res.render('client/editProfil', {
                         title: 'Tutor-A',
                         form: form,
-                        error: errors,
-                        sess: req.session
+                        error: errors
                     });
             }
         });
@@ -158,7 +160,7 @@ var Clients = {
     editPassword: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
             if (req.method == 'GET') {
-                res.render('client/editPassword', {title: 'Tutor-A', sess: req.session});
+                res.render('client/editPassword', {title: 'Tutor-A'});
             } else if (req.method == 'POST') {
                 var form = req.body;
                 var errors = [];
@@ -181,15 +183,13 @@ var Clients = {
                             errors.push(error);
                             res.render('client/editPassword', {
                                 title: 'Tutor-A',
-                                error: errors,
-                                sess: req.session
+                                error: errors
                             });
                         });
                 } else
                     res.render('client/editPassword', {
                         title: 'Tutor-A',
-                        error: errors,
-                        sess: req.session
+                        error: errors
                     });
             }
         });
@@ -205,7 +205,40 @@ var Clients = {
                 req.session.isTutor = true;
 
             }
-            res.render('client/profil', {title: 'Tutor-A', client: client, sess: req.session});
+            res.render('client/profil', {title: 'Tutor-A', client: client});
+        });
+    },
+    offerRequest: function (req, res, next) {
+        Client.findById(req.session.clientID, function (err, client) {
+            if (client) {
+                OfferR.find({clientID: client._id}, function (err, offerRequests) {
+                    Promise(function (end) {
+                        Promise(function (endReq) {
+                            var i = 0;
+                            for (var k in offerRequests) {
+                                Offer.findById(offerRequests[k].offerID, function (err, offer) {
+                                    offerRequests[i]['offer'] = offer;
+                                    if (i++ == k) {
+                                        endReq();
+                                    }
+                                });
+                            }
+                        }).then(function() {
+                            var i = 0;
+                            for (var k in offerRequests) {
+                                Client.findOne({tutorID: offerRequests[k].offer.tutorID}, function (err, tutor) {
+                                    offerRequests[i]['tutor'] = tutor;
+                                    if (i++ == k) {
+                                        end();
+                                    }
+                                });
+                            }
+                        });
+                    }).then(function () {
+                        res.render('client/offerRequests', {title: 'Tutor-A', offerRequests: offerRequests});
+                    });
+                });
+            }
         });
     }
 

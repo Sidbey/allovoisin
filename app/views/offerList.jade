@@ -3,17 +3,17 @@ extends layout
 block content
     if offers
         table.table.table-striped.table-bordered
-            - for (var k in offers)
+            each offer in offers
                 tr
-                    td= offers[k].name
-                    td= offers[k].matter.toUpperCase()
-                    td= offers[k].level
-                    td= offers[k].price + " €"
+                    td= offer.name
+                    td= offer.matter.toUpperCase()
+                    td= offer.level
+                    td= offer.price + " €"
                     td
-                        a(href="/tutor/"+offers[k].tutor.tutorID)= offers[k].tutor.firstName
-                    td= offers[k].tutor.road
+                        a(href="/tutor/" + offer.tutor.tutorID)= offer.tutor.firstName
+                    td= offer.tutor.road
                     if sess.isAuthenticated
-                        td= offers[k].tutor.distance + " m"
-                        td
-                            a.btn.btn-default(href='/') Valider
+                        td= offer.tutor.distance + " m"
+                    td
+                        a.btn.btn-default(href='/offer/' + offer._id) Voir
 

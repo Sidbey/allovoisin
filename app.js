@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(csrf());
 app.use(function (req, res, next) {
     res.locals.csrf = req.csrfToken();
+    res.locals.sess = req.session;
     next();
 });
 
@@ -61,8 +62,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err,
-            sess: req.session
+            error: err
         });
     });
 }
@@ -73,8 +73,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {},
-        sess: req.session
+        error: {}
     });
 });
 

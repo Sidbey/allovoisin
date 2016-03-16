@@ -15,5 +15,6 @@ router.post('/edit-profil', isClient, client.editProfil);
 router.get('/edit-password', isClient, client.editPassword);
 router.post('/edit-password', isClient, client.editPassword);
 router.get('/tutor-upgrade', isClient, client.tutorUpgrade);
+router.get('/offer-requests', isClient, client.offerRequest);
 
 module.exports = router;
