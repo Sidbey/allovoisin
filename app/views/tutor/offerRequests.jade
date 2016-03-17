@@ -13,9 +13,10 @@ block content
                     td= request.duration
                     td= request.offer.price + " €"
                     td= request.client.lastName
-                    td
-                        form(action='/tutor/offer-requests', method='post')
-                            input(type="hidden", name="_csrf", value=csrf)
-                            input(type="hidden", name="requestID", value=request._id)
-                            button(name="decision", value='accept') Accepter
-                            button(name="decision", value='refuse') Refuser
+                    if request.state == 'waiting'
+                        td
+                            form(action='/tutor/offer-requests', method='post')
+                                input(type="hidden", name="_csrf", value=csrf)
+                                input(type="hidden", name="requestID", value=request._id)
+                                button(name="decision", value='accept') Accepter
+                                button(name="decision", value='refuse') Refuser
