@@ -1,60 +1,6 @@
 extends layout
 
 block content
-    if error
-        - for (var k in error)
-            div.bg-danger
-                h3 #{error[k]}
-
     .container
-        #Inscription.container
-            form.form-horizontal(action='/sign-up' method='post')
-                input(type="hidden", name="_csrf", value=csrf)
-                h2 Formulaire d'inscription
-
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Nom
-                    .col-sm-9
-                        input#firstName.form-control(name='lastName', value=form.lastName, type='text', placeholder='Nom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Prénom
-                    .col-sm-9
-                        input#firstName.form-control(name='firstName', value=form.firstName, type='text', placeholder='Prénom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='email') Adresse Mail
-                    .col-sm-9
-                        input#email.form-control(name='email', value=form.email, type='email', placeholder='Adresse Mail')
-                .form-group
-                    label.col-sm-3.control-label(for='email') Adresse Postale
-                    .col-sm-9
-                        input#email.form-control(name='road', value=form.road, type='text', placeholder='Rue')
-                        input#email.form-control(name='city', value=form.city, type='text', placeholder='Ville')
-                        input#email.form-control(name='country', value=form.country, type='text', placeholder='Pays')
-                .form-group
-                    label.col-sm-3.control-label(for='password') Mot de passe
-                    .col-sm-9
-                        input#password.form-control(name='password', type='password', placeholder='Mot de passe')
-                .form-group
-                    label.col-sm-3.control-label(for='password') Confirmation Mot de passe
-                    .col-sm-9
-                        input#password.form-control(name='confirmPass', type='password', placeholder='Mot de passe')
-                .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Age
-                    .col-sm-9
-                        input#birthDate.form-control(name='age' value=form.age, type='number')
-                .form-group
-                    label.control-label.col-sm-3 Genre
-                    .col-sm-6
-                        .row
-                            .col-sm-4
-                                label.radio-inline
-                                    input#femaleRadio(type='radio' value='Female')
-                                |    Femme
-                            .col-sm-4
-                                label.radio-inline
-                                    input#maleRadio(type='radio' value='Male')
-                                |    Homme
-                        br
-                .form-group
-                    .col-sm-9.col-sm-offset-3
-                        button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
+        a.btn.btn-lg.btn-success(href='/sign-up-student') Etudiant
+        a.btn.btn-lg.btn-success(href='/sign-up-tutor') Tuteur
