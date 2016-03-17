@@ -45,6 +45,8 @@ var Offers = {
     index: function (req, res) {
         if (!req.session.isAuthenticated) {
             Offer.find({}, function (err, offers) {
+                if (offers.length == 0)
+                    res.redirect('/?error=NoOffer');
                 var promise = new Promise(function (end) {
                     var i = 0;
                     for (var k in offers) {
@@ -63,6 +65,8 @@ var Offers = {
         } else {
             Client.findById(req.session.clientID, function (err, client) {
                 Offer.find({}, function (err, offers) {
+                    if (offers.length == 0)
+                        res.redirect('/?error=NoOffer');
                     var promise = new Promise(function (end) {
                         var i = 0;
                         for (var k in offers) {
