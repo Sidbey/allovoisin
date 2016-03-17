@@ -46,7 +46,7 @@ var Offers = {
         if (!req.session.isAuthenticated) {
             Offer.find({}, function (err, offers) {
                 if (offers.length == 0)
-                    res.redirect('/?error=NoOffer');
+                    return res.redirect('/?error=NoOffer');
                 var promise = new Promise(function (end) {
                     var i = 0;
                     for (var k in offers) {
@@ -66,7 +66,7 @@ var Offers = {
             Client.findById(req.session.clientID, function (err, client) {
                 Offer.find({}, function (err, offers) {
                     if (offers.length == 0)
-                        res.redirect('/?error=NoOffer');
+                        return res.redirect('/?error=NoOffer');
                     var promise = new Promise(function (end) {
                         var i = 0;
                         for (var k in offers) {
@@ -152,6 +152,8 @@ var Offers = {
     selectOffer: function (req, res, next) {
         if (req.method == 'GET') {
             Offer.findById(req.params.id, function (err, offer) {
+                if (!offer)
+                    return res.redirect('/?error=NoOffer');
                 Client.findOne({tutorID: offer.tutorID}, function (err, tutor) {
                     offer['tutor'] = tutor;
                     if (req.session.isAuthenticated) {

@@ -1,5 +1,8 @@
 extends ../layout
 
+block css
+    link(href='/stylesheets/lucas2.less', rel='stylesheet')
+
 block content
     if error
         - for (var k in error)
@@ -7,37 +10,99 @@ block content
                 h3 #{error[k]}
 
     .container
-        #Inscription.container
-            form.form-horizontal(action='/tutor/new-offer' method='post')
-                input(type="hidden", name="_csrf", value=csrf)
-                h2 Nouvelle Offre
-
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Nom
-                    .col-sm-9
-                        input#firstName.form-control(name='name', value=form.name, type='text', placeholder='Nom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Description
-                    .col-sm-9
-                        input#firstName.form-control(name='description', value=form.description, type='text', placeholder='Prénom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='email') Matiere
-                    .col-sm-9
-                        input#email.form-control(name='matter', value=form.matter, type='text', placeholder='Adresse Mail')
-                .form-group
-                    label.col-sm-3.control-label(for='address') Niveau
-                    .col-sm-9
-                        input#address.form-control(name='level', value=form.level, type='text', placeholder='Rue')
-                .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Nombre d'heure
-                    .col-sm-9
-                        input#birthDate.form-control(name='nbHour', value=form.nbHour, type='number')
-                .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Nombre d'heure
-                    .col-sm-9
-                        input#birthDate.form-control(name='plageHoraire', value=form.plageHoraire, type='text')
-                        input#birthDate.form-control(name='plageJournaliere', value=form.plageJournaliere, type='text')
-                        input#birthDate.form-control(name='price', value=form.price, type='number')
-                .form-group
-                    .col-sm-9.col-sm-offset-3
-                        button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
+        form#new-offer(action='', method='post')
+            h3 Creation d'offre
+            h4
+            fieldset
+                input(placeholder="Nom de l'annonce", type='text', required='', autofocus='')
+            fieldset
+                | Prix :
+                input(placeholder='en € par heure')
+            fieldset
+                | Matiere :
+                select
+                    option Francais
+                    option Anglais
+                    option Mathématiques
+                    option Physique-Chimie
+                    option SVT
+            fieldset
+                | Niveau :
+                select
+                    option Primaire
+                    option Collège
+                    option Lycée
+                    option Université
+            fieldset
+                label Plage journalière :
+            fieldset
+                ul
+                    li
+                        input(type='checkbox', name='jour1', value='1')
+                        |  Lundi
+                    li
+                        input(type='checkbox', name='jour2', value='2')
+                        |  Mardi
+                    li
+                        input(type='checkbox', name='jour3', value='3')
+                        |  Mercredi
+                    li
+                        input(type='checkbox', name='jour4', value='4')
+                        |  Jeudi
+                    li
+                        input(type='checkbox', name='jour5', value='5')
+                        |  Vendredi
+                    li
+                        input(type='checkbox', name='jour6', value='1')
+                        |  Samedi
+                    li
+                        input(type='checkbox', name='jour7', value='7')
+                        |  Dimanche
+            fieldset
+                label Heures de disponibilités :
+            fieldset
+                select
+                    option 06:00
+                    option 07:00
+                    option 08:00
+                    option 09:00
+                    option 10:00
+                    option 11:00
+                    option 12:00
+                    option 13:00
+                    option 14:00
+                    option 15:00
+                    option 16:00
+                    option 17:00
+                    option 18:00
+                    option 19:00
+                    option 20:00
+                    option 21:00
+                    option 22:00
+                    option 23:00
+                    option 00:00
+                select
+                    option 07:00
+                    option 08:00
+                    option 09:00
+                    option 10:00
+                    option 11:00
+                    option 12:00
+                    option 13:00
+                    option 14:00
+                    option 15:00
+                    option 16:00
+                    option 17:00
+                    option 18:00
+                    option 19:00
+                    option 20:00
+                    option 21:00
+                    option 22:00
+                    option 23:00
+                    option 00:00
+                input(type='checkbox')
+                |  N'importe quelle heure
+            fieldset
+                textarea(placeholder="Description de l'annonce", required='')
+            fieldset
+                button#new-offer-submit(name='submit', type='submit', data-submit='...Sending') Mettre l'annonce en ligne
