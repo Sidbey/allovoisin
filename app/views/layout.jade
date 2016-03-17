@@ -1,25 +1,55 @@
+mixin tabs(link, name)
+    if (link === url)
+        li
+            a#button.page-scroll(href=link)= name
+    else
+        li
+            a.page-scroll(href=link)= name
+
+
 doctype html
 html
-  head
-    title= title
-    meta(charset='utf-8')
+    head
+        title= title
+        meta(charset='utf-8')
 
-    link(href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', rel='stylesheet', type='text/css')
-    link(href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
-    link(rel='stylesheet', href='/stylesheets/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/css/style.css')
+        link(href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+
+    body
+        nav#mainNav.navbar.navbar-default.navbar-fixed-top
+            .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        +tabs('/', 'Accueil')
+                        +tabs('/offers', 'Nos offres')
+                        +tabs('#portfolio', 'Nous contacter')
+                        if sess.isAuthenticated
+                            +tabs('/client/profil', 'Profil')
+                            if sess.isTutor
+                                +tabs('/tutor/dashboard', 'Dashboard')
+                            +tabs('/sign-out', 'Se déconnecter')
+                        else
+                            +tabs('/sign-up', 'S\'inscrire')
+                            +tabs('/sign-in', 'Se connecter')
 
 
+        block content
 
-
-
-    block content
-
-    // jQuery (necessary for Bootstrap's JavaScript plugins)
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-    // Include all compiled plugins (below), or include individual files as needed
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
-    // jQuery (necessary for Bootstrap's JavaScript plugins)
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-    // Include all compiled plugins (below), or include individual files as needed
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+        // jQuery (necessary for Bootstrap's JavaScript plugins)
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+        // Include all compiled plugins (below), or include individual files as needed
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+        // IE10 viewport hack for Surface/desktop Windows 8 bug
+        script(src='../../assets/js/ie10-viewport-bug-workaround.js')

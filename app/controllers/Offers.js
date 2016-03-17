@@ -19,9 +19,15 @@ function isMatter(matter) {
     matterList = ['Français', 'Maths', 'PC', 'SVT', 'Anglais'];
     return matterList.indexOf(matter) != -1;
 }
+function isLevel(level) {
+    levelList = ['Primaire', 'College', 'Lycée', 'Université'];
+    return levelList.indexOf(level) != -1;
+}
 function isBadValue(req) {
-    return isEmpty(req.body.name) || !isMatter(req.body.matter) || isEmpty(req.body.level)
-        || !isNumber(req.body.nbHour) || isEmpty(req.body.plageHoraire)
+    var regexTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+
+    return isEmpty(req.body.name) || !isMatter(req.body.matter) || !isLevel(req.body.level)
+        || !regexTime.test(req.body.horaireMin) || !regexTime.test(req.body.horaireMax)
         || isEmpty(req.body.plageJournaliere) || !isNumber(req.body.price);
 }
 function calculDistanceBetweenTwoPersons(client, tutor) {
@@ -111,8 +117,7 @@ var Offers = {
                         matter: req.body.matter,
                         level: req.body.level,
                         tutorID: client.tutorID,
-                        nbHour: parseInt(req.body.nbHour),
-                        plageHoraire: req.body.plageHoraire,
+                        plageHoraire: req.body.horaireMin + " - " + req.body.horaireMax,
                         plageJournaliere: req.body.plageJournaliere,
                         price: parseInt(req.body.price)
                     });

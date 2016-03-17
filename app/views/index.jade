@@ -1,61 +1,32 @@
 extends layout
 
 block content
-    body
-        nav#mainNav.navbar.navbar-default.navbar-fixed-top
-            .container-fluid
-                // Brand and toggle get grouped for better mobile display
-                .navbar-header
-                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
-                // Collect the nav links, forms, and other content for toggling
-                #bs-example-navbar-collapse-1.collapse.navbar-collapse
-                    ul.nav.navbar-nav.navbar-right
-                        li
-                            a.page-scroll(href='#about') Accueil
-                        li
-                            a.page-scroll(href='#services') Nos offres
-                        li
-                            a.page-scroll(href='#portfolio') Nous contacter
-                        li
-                            a#button2.survol(href='/sign-up') S'inscrire
-                        li
-                            a#button.survol(href='/sign-in') Se connecter
-                // /.navbar-collapse
-            // /.container-fluid
-        br
-        br
-        br
-        header.section
-            .header-content
-                .header-content-inner
-        ul.list-inline
-            li
-                a#button.survol.btn.btn-primary.page-scroll(href='/sign-in') Rechercher votre tuteur
-        .container-fluid.bloc
-            .row
-                .col-sm-12.centrer
-                    a#presentation
-                    h2.text-center Quel est le but de ce site?
-                    hr
-                    p En utilisant ce site, vous pourrez trouver un tuteur proche de chez vous, Grace à une recherche qui prend en compte la distance.
+    header.section
+        .header-content
+            .header-content-inner
+    ul.list-inline
+        li
+            a#button.survol.btn.btn-primary.page-scroll(href='/offers') Rechercher votre tuteur
+    .container-fluid.bloc
+        .row
+            .col-sm-12.centrer
+                a#presentation
+                h2.text-center Quel est le but de ce site?
+                hr
+                p En utilisant ce site, vous pourrez trouver un tuteur proche de chez vous, Grace à une recherche qui prend en compte la distance.
 
-            .row
-                .col-sm-6.bordure-left
-                    a#projet.anchor
-                    h2.text-center Qui sommes nous?
-                    hr
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
-                    br
-                .col-sm-6.bordure-right
-                    a#etudes
-                    h2.text-center Études
-                    hr
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
-        footer.cl-footer
-            h2 Tutor-A
+        .row
+            .col-sm-6.bordure-left
+                a#projet.anchor
+                h2.text-center Qui sommes nous?
+                hr
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
+                br
+            .col-sm-6.bordure-right
+                a#etudes
+                h2.text-center Études
+                hr
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
+    footer.cl-footer
+        h2 Tutor-A
 

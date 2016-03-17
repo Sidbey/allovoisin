@@ -2,9 +2,9 @@ extends  layout
 
 block content
     if error
-        - for (var k in error)
+        each err in error
             div.bg-danger
-                h3 #{error[k]}
+                h3= err
 
 
     form(action='/sign-in' method='post')
