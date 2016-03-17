@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
-var csrf = require('csurf');
+//var csrf = require('csurf');
+var lusca = require('lusca');
 
 var routes = require('./app/routes/index');
 var clients = require('./app/routes/clients');
@@ -35,7 +36,16 @@ app.use(require('less-middleware')(
         dest: path.join(__dirname, 'public')
     }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(csrf());
+app.use(lusca({
+    csrf: true,
+    csp: { /* ... */},
+    xframe: 'SAMEORIGIN',
+    p3p: 'ABCDEF',
+    hsts: {maxAge: 31536000, includeSubDomains: true, preload: true},
+    xssProtection: true
+}));
+
+//app.use(csrf());
 app.use(function (req, res, next) {
     res.locals.csrf = req.csrfToken();
     res.locals.sess = req.session;
