@@ -8,7 +8,7 @@ block content
 
     .container
         #Inscription.container
-            form.form-horizontal(action='/sign-up' method='post')
+            form.form-horizontal(action='/sign-up-tutor' method='post')
                 input(type="hidden", name="_csrf", value=csrf)
                 h2 Formulaire d'inscription
 
@@ -42,19 +42,45 @@ block content
                     label.col-sm-3.control-label(for='birthDate', placeholder='age') Age
                     .col-sm-9
                         input#birthDate.form-control(name='age' value=form.age, type='number')
-                .form-group
-                    label.control-label.col-sm-3 Genre
-                    .col-sm-6
-                        .row
-                            .col-sm-4
-                                label.radio-inline
-                                    input#femaleRadio(type='radio' value='Female')
-                                |    Femme
-                            .col-sm-4
-                                label.radio-inline
-                                    input#maleRadio(type='radio' value='Male')
-                                |    Homme
-                        br
+                div.col-md-6
+                    | Matière(s) supervisée(s):
+                    #cache
+                        li
+                            | Mathématiques
+                            input(type='checkbox', name='matters', value='Maths')
+                        li
+                            | Physique-Chimie
+                            input(type='checkbox', name='matters', value='PC')
+                        li
+                            | Français
+                            input(type='checkbox', name='Choix', value='Français')
+                        li
+                            | Anglais
+                            input(type='checkbox', name='Choix', value='Anglais')
+                        li
+                            | Science de la vie et de la terre
+                            input(type='checkbox', name='Choix', value='SVT')
+                        li
+                            | Mathématiques
+                            input(type='checkbox', name='Choix', value='Maths')
+                div.col-md-6
+                    p.recherche Niveau :
+                            select(name='level', size='1')
+                                option
+                                    | Sixième
+                                option
+                                    | Cinquième
+                                option
+                                    | Quatrième
+                                option
+                                    | Troisième
+                                option
+                                    | Seconde
+                                option
+                                    | Première
+                                option
+                                    | Terminale
+                        button.button.btn-primary.centrage Ajouter
                 .form-group
                     .col-sm-9.col-sm-offset-3
                         button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire

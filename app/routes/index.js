@@ -3,40 +3,50 @@ var router = express.Router();
 var client = require('../controllers/Clients');
 var offer = require('../controllers/Offers');
 
+function isAlreadyConnected(req, res, next) {
+    console.log('isAuth = ' + req.session.isAuthenticated);
+    if (req.session.isAuthenticated === true)
+        return res.redirect('/?error=alreadyConnected');
+    else
+        next();
+}
+function isClient(req, res, next) {
+    if (req.session.isAuthenticated === true)
+        next();
+    else
+        return res.redirect('/?error=notLogged');
+}
+
 // GET home page
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Tutor-A', sess: req.session, csrf: req.csrfToken()});
+    res.render('index', {title: 'Tutor-A'});
 });
 // GET/POST connection page
-router.get('/sign-in', function (req, res, next) {
-    if (req.session.isAuthenticated) {
-        res.redirect('/?error=alreadyConnected');
-        return;
-    }
-    res.render('signIn', {title: 'Tutor-A', form: {email: ""}, sess: req.session});
+router.get('/sign-in', isAlreadyConnected, function (req, res, next) {
+    res.render('signIn', {title: 'Tutor-A', form: {}});
 });
-router.post('/sign-in', client.signIn);
+router.post('/sign-in', isAlreadyConnected, client.signIn);
 // GET disconnect page
 router.get('/sign-out', client.signOut);
 // GET/POST inscription page
-router.get('/sign-up', function (req, res, next) {
-    if (req.session.isAuthenticated) {
-        res.redirect('/?error=alreadyConnected');
-        return;
-    }
-    res.render('signUp', {
-        title: 'Tutor-A', form: {
-            firsName: "", lastName: "", email: "", age: "",
-            road: "", postalCode: "", city: "", country: ""
-        }, sess: req.session
-    })
+router.get('/sign-up', isAlreadyConnected, function (req, res, next) {
+    res.render('signUp', {title: 'Tutor-A', form: {}})
 });
-router.post('/sign-up', client.signUp);
+router.get('/sign-up-student', isAlreadyConnected, function (req, res, next) {
+    res.render('signUpStudent', {title: 'Tutor-A', form: {}})
+});
+router.get('/sign-up-tutor', isAlreadyConnected, function (req, res, next) {
+    res.render('signUpTutor', {title: 'Tutor-A', form: {}})
+});
+router.post('/sign-up-student', isAlreadyConnected, client.signUp);
+router.post('/sign-up-tutor', isAlreadyConnected, client.signUp);
 
 router.get('/offers', offer.index);
+router.get('/offer/:id', offer.selectOffer);
+router.post('/offer/:id', isClient, offer.selectOffer);
 
 router.get('/tuteurs', function (req, res, next) {
-    res.render('tuteurs', {title: 'Tutor-A', sess: req.session});
+    res.render('tuteurs', {title: 'Tutor-A'});
 });
 
 module.exports = router;

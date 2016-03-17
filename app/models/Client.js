@@ -8,11 +8,11 @@ var schema = new Schema({
     password: {type: String, required: true},
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
-    age: {type: Number, required: true},
+    age: {type: String, required: true},
     tutorID: {type: Schema.Types.ObjectId, default: null},
 
     road: {type: String, required: true},
-    postalCode: {type: Number, required: true},
+    postalCode: {type: String, required: true},
     city: {type: String, required: true},
     country: {type: String, required: true},
     latitude: {type: Number, required: true},

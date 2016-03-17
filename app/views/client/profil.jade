@@ -8,7 +8,10 @@ block content
     p= client.road
     p= client.city
     br
-    p= client
+    pre= client
+
+    a.btn.btn-link(href='/client/edit-profil') Editer
+    a.btn.btn-link(href='/client/edit-password') Modifier le mot de passe
 
     if client.tutorID
         p Vous êtes tuteur

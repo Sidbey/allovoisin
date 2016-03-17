@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    if offerRequests
+        table.table.table-striped.table-bordered
+            each request in offerRequests
+                tr
+                    td= request.state
+                    td
+                        a(href='/offer/' + request.offerID)= request.offer.name
+                    td= request.date
+                    td= request.beginHour
+                    td= request.duration
+                    td= request.offer.price + " €"
+                    td= request.tutor.lastName
