@@ -30,27 +30,32 @@ block content
         br
         br
         br
-        header
-            .header-content.section
+        header.section
+            .header-content
                 .header-content-inner
-                    ul.list-inline
-                        li
-                            a#button.btn.btn-primary.page-scroll.centree(href='#about') Recherche dès maintenant votre tuteur
-        .container-fluid
+        ul.list-inline
+            li
+                a#button.survol.btn.btn-primary.page-scroll(href='/sign-in') Rechercher votre tuteur
+        .container-fluid.bloc
             .row
-                .col-sm-12
+                .col-sm-12.centrer
                     a#presentation
-                    h2.text-center Présentation
-                    |                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quisquam asperiores provident ipsa illum delectus quam quo earum aut tempora ipsam ducimus nam facere aliquam, consequuntur, hic quos saepe fugit?
+                    h2.text-center Quel est le but de ce site?
+                    hr
+                    p En utilisant ce site, vous pourrez trouver un tuteur proche de chez vous, Grace à une recherche qui prend en compte la distance.
+
             .row
-                .col-sm-6
+                .col-sm-6.bordure-left
                     a#projet.anchor
-                    h2.text-center Projets
-                    |                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
+                    h2.text-center Qui sommes nous?
+                    hr
+                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
                     br
-                .col-sm-6
+                .col-sm-6.bordure-right
                     a#etudes
                     h2.text-center Études
-                    |                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
-
+                    hr
+                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
+        footer.cl-footer
+            h2 Tutor-A
 

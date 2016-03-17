@@ -21,6 +21,7 @@ router.post('/sign-up', client.signUp);
 router.get('/signUpStudent', function (req, res, next) {
     res.render('signUpStudent', {title: 'Tutor-A'});
 });
+
 router.get('/signUpTutors', function (req, res, next) {
     res.render('signUpTutors', {title: 'Tutor-A'});
 });
