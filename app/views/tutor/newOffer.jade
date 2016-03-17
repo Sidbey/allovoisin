@@ -2,13 +2,14 @@ extends ../layout
 
 block content
     if error
-        - for (var k in error)
+        each err in error
             div.bg-danger
-                h3 #{error[k]}
+                h3= err
 
     .container
         #Inscription.container
             form.form-horizontal(action='/tutor/new-offer' method='post')
+                input(type="hidden", name="_csrf", value=csrf)
                 h2 Nouvelle Offre
 
                 .form-group

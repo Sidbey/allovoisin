@@ -5,9 +5,10 @@ html
         meta(charset='utf-8')
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
-    body
-        input(type="hidden", name="_csrf", value=csrf)
+        block css
+        link(rel='icon', href='/favicon.png', type='image/png')
 
+    body
         #display_navigation
 
             nav.navbar.navbar-inverse(role='navigation')
@@ -43,3 +44,6 @@ html
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
         // Include all compiled plugins (below), or include individual files as needed
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+        // For Win 8
+        script(src='../../assets/js/ie10-viewport-bug-workaround.js')
+

@@ -8,14 +8,16 @@ function isTutor(req, res, next) {
         if (req.session.isTutor === true)
             next();
         else
-            res.redirect('/?error=notTutor');
+            return res.redirect('/?error=notTutor');
     else
-        res.redirect('/?error=notLogged');
+        return res.redirect('/?error=notLogged');
 }
 
 router.get('/dashboard', isTutor, tutor.dashboard);
 router.get('/new-offer', isTutor, offer.newOffer);
 router.post('/new-offer', isTutor, offer.newOffer);
+router.get('/offer-requests', isTutor, tutor.offerRequest);
+router.post('/offer-requests', isTutor, tutor.offerRequestDecision);
 
 router.get('/:id', tutor.publicProfil);
 

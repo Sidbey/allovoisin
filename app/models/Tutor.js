@@ -2,7 +2,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var schema = new Schema({
-    specialtiesID: {type: [Schema.Types.ObjectId]},
+    matters: {type: [String]},
+    level: {type: String},
     note: {type: Number, default: 0},
     nbHour: {type: Number, default: 0}
 });
