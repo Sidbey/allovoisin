@@ -30,4 +30,8 @@ router.get('/tuteurs', function (req, res, next) {
     res.render('tuteurs', {title: 'Tutor-A'});
 });
 
+router.get('/new-offer', function (req, res, next) {
+    res.render('new-offer', {title: 'Tutor-A'});
+});
+
 module.exports = router;

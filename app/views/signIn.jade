@@ -1,49 +1,14 @@
 extends layout
 
 block content
-    if error
-        - for (k in error)
-            h2= error[k]
-    body#page-top.color
-        nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix-top
-            .container-fluid
-                // Brand and toggle get grouped for better mobile display
-                .navbar-header
-                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
-                // Collect the nav links, forms, and other content for toggling
-                #bs-example-navbar-collapse-1.collapse.navbar-collapse
-                    ul.nav.navbar-nav.navbar-right
-                        li
-                            a.page-scroll.btn-tertiary(href='/') Accueil
-                        li
-                            a.page-scroll.btn-tertiary(href='#services') Nos offres
-                        li
-                            a.page-scroll.btn-tertiary(href='#portfolio') Nous contacter
-
-    br
-    br
-    br
-    br
-    br
     .container
-        .row
-            .col-md-offset-5.col-md-3
-                .form-login
+        #signIn-form.center-div
+            h3 Connection
 
-                    h4.centrage Se connecter
-                    form
-                        input#userName.form-control.input-sm.chat-input(type='text', required='', placeholder='Entrez votre mail')
-                        br
-                        input#userPassword.form-control.input-sm.chat-input(type='text', required='', placeholder='Entrez votre mot de passe')
-                        br
-                        .wrapper
-                            span.group-btn
-                                a.button.centrage(href='#')
-                                    | Connexion
+            fieldset
+                form(action='', method='post')
+                    input(type='email', required='', name='Email', placeholder='Email')
 
-                    a(href='/sign-up') Pas encore inscrit?
+                    input(type='password', required='', name='Password', placeholder='Mot de passe')
+
+                    input(type='submit', value='Se Connecter')
