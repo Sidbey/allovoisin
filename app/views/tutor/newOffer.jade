@@ -2,9 +2,9 @@ extends ../layout
 
 block content
     if error
-        - for (var k in error)
-        div.bg-danger
-            h3 #{error[k]}
+        each err in error
+            div.bg-danger
+                h3= err
 
     .container
         #Inscription.container
