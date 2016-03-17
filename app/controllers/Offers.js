@@ -16,7 +16,7 @@ function isNumber(input) {
     return input != undefined && regexNumber.test(input);
 }
 function isMatter(matter) {
-    matterList = ['Français', 'Maths', 'Physique', 'Chimie', 'SVT', 'Anglais'];
+    matterList = ['Français', 'Maths', 'PC', 'SVT', 'Anglais'];
     return matterList.indexOf(matter) != -1;
 }
 function isBadValue(req) {
@@ -35,7 +35,8 @@ function calculDistanceBetweenTwoPersons(client, tutor) {
 }
 function isBadValueForValidation(form) {
     var regexTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-    return !validator.isDate(form.date) || !regexTime.test(form.beginHour)
+    var regexDate = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+    return !validator.isDate(form.date) && !regexDate.test(form.date) || !regexTime.test(form.beginHour)
         || !validator.isNumeric(form.duration)
 }
 
@@ -77,6 +78,9 @@ var Offers = {
                         }
                     });
                     promise.then(function () {
+                        offers.sort(function (a, b) {
+                            return a.tutor.distance - b.tutor.distance;
+                        });
                         res.render('offerList', {title: 'Tutor-A', offers: offers});
                     });
                 });
@@ -119,8 +123,7 @@ var Offers = {
         });
 
     },
-
-    editOffer: function (req, res, next) {
+    editOffer: function (req, res, next) { // NOT IMPLEMENTED
         Offer.findById(req.params.id, function (err, offer) {
             if (req.method == 'GET') {
                 res.render('tutor/editOffer', {title: 'Tutor-A', offer: offer});
@@ -167,19 +170,22 @@ var Offers = {
                     error.push("Un champ est incorrect ou manquant !");
                 }
                 if (error.length == 0) {
-                    var offerV = new OfferRequest({
-                        offerID: req.params.id,
-                        clientID: req.session.clientID,
-                        date: form.date,
-                        beginHour: form.beginHour,
-                        duration: parseInt(form.duration, 10),
-                        state: 'waiting'
+                    Offer.findById(req.params.id, function (err, offer) {
+                        var offerV = new OfferRequest({
+                            offerID: req.params.id,
+                            clientID: req.session.clientID,
+                            tutorID: offer.tutorID,
+                            date: form.date,
+                            beginHour: form.beginHour,
+                            duration: parseInt(form.duration, 10),
+                            state: 'waiting'
+                        });
+                        offerV.save(function (err) {
+                            if (err) throw err;
+                            console.log('New Offer Request');
+                        });
+                        res.redirect('/client/offer-requests');
                     });
-                    offerV.save(function (err) {
-                        if (err) throw err;
-                        console.log('New Offer Request');
-                    });
-                    res.redirect('/client/offer-requests');
                 } else {
                     Offer.findById(req.params.id, function (err, offer) {
                         if (!offer)

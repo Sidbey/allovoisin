@@ -16,6 +16,8 @@ function isTutor(req, res, next) {
 router.get('/dashboard', isTutor, tutor.dashboard);
 router.get('/new-offer', isTutor, offer.newOffer);
 router.post('/new-offer', isTutor, offer.newOffer);
+router.get('/offer-requests', isTutor, tutor.offerRequest);
+router.post('/offer-requests', isTutor, tutor.offerRequestDecision);
 
 router.get('/:id', tutor.publicProfil);
 

@@ -31,6 +31,20 @@ function isBadValue(form) {
 function completeAddress(user) {
     return user.road + ", " + /*user.postalCode + " " +*/ user.city + ", " + user.country;
 }
+function isBadValueForTutor(form) {
+    var matterList = ['Français', 'Maths', 'PC', 'SVT', 'Anglais'];
+    var levelList = ['Sixième', 'Cinquième', 'Quatrième', 'Troisième',
+        'Seconde', 'Première', 'Terminale'];
+    var badMatter = false;
+    var badLevel = false;
+    for (k in form.matters)
+        if (matterList.indexOf(form.matters[k]) == -1)
+            badMatter = true;
+    if (!isEmpty(form.level) && levelList.indexOf(form.level) == -1)
+        badLevel = true;
+    return badMatter || badLevel;
+}
+
 var Clients = {
     index: function (req, res) {
         Client.find({}, function (err) {
@@ -39,6 +53,7 @@ var Clients = {
         });
     },
     signIn: function (req, res, next) {//POST Request
+        console.log(req.body.vehicle);
         Client.findOne({'email': req.body.email}, function (err, client) {
             if (err) throw (err);
             var error = [];
@@ -72,40 +87,57 @@ var Clients = {
         res.redirect('/');
     },
     signUp: function (req, res, next) { // POST Request
-        var client = req.body;
-        Client.findOne({'email': client.email}, function (err, clientInBase) {
+        console.log(req.url);
+        var form = req.body;
+        Client.findOne({'email': form.email}, function (err, clientInBase) {
             var errors = [];
             if (clientInBase)
                 errors.push("L'email est déja utilisé par un autre client !");
 
-            if (isBadValue(client) || isEmpty(client.password) || !validator.isEmail(client.email))
+            if (isBadValue(form) || isEmpty(form.password) || !validator.isEmail(form.email))
                 errors.push("Un champ est incorrect ou manquant !");
 
-            if (client.password != client.confirmPass)
+            if (form.password != form.confirmPass)
                 errors.push("Les mdp ne correspondent pas !");
 
+            if (errors.length === 0 && req.url == '/sign-up-tutor') {
+                if (isBadValueForTutor(form))
+                    errors.push("Un champ est incorrect ou manquant pour le tuteur !");
+                else {
+                    var tutor = new Tutor(form)
+                        .save()
+                        .then(savedTutor => {
+                            form['tutorID'] = savedTutor._id;
+                        });
+                }
+            }
             if (errors.length === 0) {
                 // Envoie d'une requête à l'API de Google Maps
-                var address = completeAddress(client);
+                var address = completeAddress(form);
                 Geoloc.getLocalisationData(address)
                     .then(locData => {
-                        Object.assign(client, locData);
-                        console.log(client);
-                        return Client(client).save();
+                        Object.assign(form, locData);
+                        console.log(form);
+                        return Client(form).save();
                     })
                     .then(savedClient => {
                         console.log('New client inscription : ' + savedClient.email);
                         req.session.isAuthenticated = true;
                         req.session.clientID = savedClient._id;
-                        req.session.isTutor = false;
+                        req.session.isTutor = (req.url == '/sign-up-tutor');
                         res.redirect('/client/profil');
                     })
                     .catch(error => {
                         errors.push(error);
-                        res.render('signUp', {title: 'Tutor-A', form: req.body, error: errors});
+                        if (req.url == '/sign-up-tutor')
+                            res.render('signUpTutor', {title: 'Tutor-A', form: req.body, error: errors});
+                        else
+                            res.render('signUpStudent', {title: 'Tutor-A', form: req.body, error: errors});
                     });
-            } else
-                res.render('signUp', {title: 'Tutor-A', form: req.body, error: errors});
+            } else if (req.url == '/sign-up-tutor')
+                res.render('signUpTutor', {title: 'Tutor-A', form: req.body, error: errors});
+            else
+                res.render('signUpStudent', {title: 'Tutor-A', form: req.body, error: errors});
 
 
         });
@@ -210,10 +242,14 @@ var Clients = {
     },
     offerRequest: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
+            console.log("--PRE--");
             if (client) {
                 OfferR.find({clientID: client._id}, function (err, offerRequests) {
-                    Promise(function (end) {
-                        Promise(function (endReq) {
+                    if (offerRequests.length == 0)
+                        return res.redirect('/?error=NoRequest');
+
+                    new Promise(function (end) {
+                        new Promise(function (endReq) {
                             var i = 0;
                             for (var k in offerRequests) {
                                 Offer.findById(offerRequests[k].offerID, function (err, offer) {
@@ -223,10 +259,10 @@ var Clients = {
                                     }
                                 });
                             }
-                        }).then(function() {
+                        }).then(function () {
                             var i = 0;
                             for (var k in offerRequests) {
-                                Client.findOne({tutorID: offerRequests[k].offer.tutorID}, function (err, tutor) {
+                                Client.findOne({tutorID: offerRequests[k].tutorID}, function (err, tutor) {
                                     offerRequests[i]['tutor'] = tutor;
                                     if (i++ == k) {
                                         end();
@@ -234,6 +270,7 @@ var Clients = {
                                 });
                             }
                         });
+
                     }).then(function () {
                         res.render('client/offerRequests', {title: 'Tutor-A', offerRequests: offerRequests});
                     });

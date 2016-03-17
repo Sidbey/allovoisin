@@ -1,10 +1,12 @@
 require('../models/Offer');
 require('../models/Client');
+require('../models/OfferRequest');
 
 var mongoose = require('mongoose'),
     Client = mongoose.model('Client'),
     Tutor = mongoose.model('Tutor'),
-    Offer = mongoose.model('Offer');
+    Offer = mongoose.model('Offer'),
+    OfferR = mongoose.model('OfferRequest');
 
 var Tutors = {
     dashboard: function (req, res, next) {
@@ -35,6 +37,52 @@ var Tutors = {
             });
 
         });
+    },
+    offerRequest: function (req, res, next) {
+        Client.findById(req.session.clientID, function (err, client) {
+            if (client) {
+                OfferR.find({tutorID: client.tutorID}, function (err, offerRequests) {
+                    if (offerRequests.length == 0)
+                        return res.redirect('/?error=NoRequest');
+
+                    new Promise(function (end) {
+                        var i1 = 0;
+                        for (var k1 in offerRequests) {
+                            Offer.findById(offerRequests[k1].offerID, function (err, offer) {
+                                offerRequests[i1]['offer'] = offer;
+                                i1++;
+                            });
+                        }
+                        var i2 = 0;
+                        for (var k2 in offerRequests) {
+                            Client.findById(offerRequests[k2].clientID, function (err, client) {
+                                offerRequests[i2]['client'] = client;
+                                if (i2++ == k2) {
+                                    end();
+                                }
+                            });
+                        }
+                    }).then(function () {
+                        res.render('tutor/offerRequests', {title: 'Tutor-A', offerRequests: offerRequests});
+                    });
+                });
+            }
+        });
+    },
+    offerRequestDecision: function (req, res, next) {
+        OfferR.findById(req.body.requestID, function (err, offerRequest) {
+            var state = "";
+            if (req.body.decision === "accept") {
+                state = "accepted";
+                offerRequest.update({state: state}).exec();
+
+            } else if (req.body.decision === "refuse") {
+                state = "refused";
+                offerRequest.update({state: state}).exec();
+            }
+            res.redirect('/tutor/offer-requests');
+        });
+
     }
 };
 

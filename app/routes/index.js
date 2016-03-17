@@ -32,7 +32,14 @@ router.get('/sign-out', client.signOut);
 router.get('/sign-up', isAlreadyConnected, function (req, res, next) {
     res.render('signUp', {title: 'Tutor-A', form: {}})
 });
-router.post('/sign-up', isAlreadyConnected, client.signUp);
+router.get('/sign-up-student', isAlreadyConnected, function (req, res, next) {
+    res.render('signUpStudent', {title: 'Tutor-A', form: {}})
+});
+router.get('/sign-up-tutor', isAlreadyConnected, function (req, res, next) {
+    res.render('signUpTutor', {title: 'Tutor-A', form: {}})
+});
+router.post('/sign-up-student', isAlreadyConnected, client.signUp);
+router.post('/sign-up-tutor', isAlreadyConnected, client.signUp);
 
 router.get('/offers', offer.index);
 router.get('/offer/:id', offer.selectOffer);
