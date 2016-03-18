@@ -4,19 +4,25 @@ mixin promptName(firstName, lastName)
 extends ../layout
 
 block content
-    h2
-        +promptName(tutor.firstName, tutor.lastName)
-    if offers
-        table.table.table-striped.table-bordered
-            each offer in offers
-                tr
-                    td= offer.name
-                    td= offer.matter.toUpperCase()
-                    td= offer.level
-                    td= offer.price + " €"
+    .centrer
+        h2
+            +promptName(tutor.firstName, tutor.lastName)
+            p= tutor.nbHour
+            p Matières
+            each  matter in tutor.matters
+                li= matter
+            p= tutor.level
+        if offers
+            table.table.table-striped.table-bordered
+                each offer in offers
+                    tr
+                        td= offer.name
+                        td= offer.matter.toUpperCase()
+                        td= offer.level
+                        td= offer.price + " €"
 
-    a.btn.btn-link(href='/tutor/new-offer') Créer une offre
-    a.btn.btn-link(href='/tutor/offer-requests') Voir les requêtes des clients
+        a.btn.btn-link(href='/tutor/new-offer') Créer une offre
+        a.btn.btn-link(href='/tutor/offer-requests') Voir les requêtes des clients
 
 
 
