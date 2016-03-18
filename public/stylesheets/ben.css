@@ -177,3 +177,42 @@ h3 {
   background: #d66a00;
 }
 
+.btn-signup {
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 25px;
+    background: orange;
+    padding: 10px 20px 10px 20px;
+    margin-right: 2em;
+    text-decoration: none;
+}
+
+.btn-signup:hover {
+    background: darkorange;
+    color: #ffffff;
+}
+
+.signup  {
+    font-size: 4em;
+    color: black;
+    text-align: center;
+    margin-top: 6em;
+}
+
+/* profil */
+
+.tuteur-p {
+    font-size: 2.1em;
+    color: black;
+    margin-top: 1em;
+}
+.table > tbody > tr > td > b {
+    margin-left: 5px;
+}
+
+.panel-body {
+    font-size: 1.8em;
+}
