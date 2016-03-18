@@ -4,16 +4,23 @@ block content
     if offers
         table.table.table-striped.table-bordered
             each offer in offers
-                tr
-                    td= offer.name
-                    td= offer.matter.toUpperCase()
-                    td= offer.level
-                    td= offer.price + " €"
-                    td
-                        a(href="/tutor/" + offer.tutor.tutorID)= offer.tutor.firstName
-                    td= offer.tutor.road
-                    if sess.isAuthenticated
-                        td= offer.tutor.distance + " m"
-                    td
-                        a.btn.btn-default(href='/offer/' + offer._id) Voir
+                .col-sm-8.bordure
+                    h2 Offres
+                    div
+                        .offer-profile
+                            img.avatar(src='http://www.afdt-asso.fr/wp-content/uploads/2014/10/facebook-profile-picture-no-pic-avatar-e1358915839552.jpg', alt='Photo-profil')
+                            .username
+                                p= offer.tutor.firstName
+                            .matter
+                                p= offer.matter.toUpperCase() + ' | ' + offer.level
+                            .description
+                                p= offer.description
+                            ul.data
+                                li
+                                    span.entypo-heart=  offer.price + " €"
+                                li
+                                    span.entypo-eye= offer.tutor.distance + " m"
+
+                                li
+                                    a.btn.btn-default(href='/offer/' + offer._id) Voir
 
