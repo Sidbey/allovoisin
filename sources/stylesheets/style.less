@@ -30,12 +30,10 @@ nav {
   position: relative;
   z-index: -1;
   padding: 14em 0em 14em;
-  top:-70px;
   width: 100%;
   min-height: 100%;
   height: auto;
-  top: 0;
-  left: 0;
+  top:0;
 }
 
 .navbar-nav {
@@ -89,7 +87,7 @@ ul.list-inline #button:hover {
 /*Taille de la photo et des caractères avec un petit écran*/
 @media (max-width:767px){
   .navbar-default{
-    background-color: whitesmoke;
+    background-color: white;
   }
   #button2{
     color: black;
@@ -104,7 +102,7 @@ ul.list-inline #button:hover {
     min-height: 100%;
     z-index: -1;
     padding: 4em 0em 14em;
-    top:30px;
+    top:0;
     max-width:100%;
     height:35%;
   }
@@ -179,13 +177,19 @@ ul.list-inline #button:hover {
   border-width: 3px;
   padding-right: 0px;
   margin: 0 auto;
-
 }
-
+.bordure-left hr  {
+  max-width: 150px;
+  border-color: #f05f40;
+  border-width: 3px;
+  padding-right: 0px;
+  margin: 0 auto;
+}
 
 .bloc p {
   padding-top: 1.5em;
   font-size: 18px;
+  line-height: 1.8em;
 }
 .bloc {
   background-color: #EEEEEE;
@@ -245,4 +249,14 @@ ul.list-inline #button {
   display: none;
 }
 
+.table {
+  font-size: 1.5em;
+}
 
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+  padding-top: 1em;
+}
+
+.video {
+  background-color: darkslategray;
+}
