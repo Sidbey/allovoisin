@@ -13,7 +13,7 @@ block content
         p= offer.price + " €"
         a(href="/tutor/" + offer.tutor.tutorID)= offer.tutor.firstName
         p= offer.tutor.road
-        if sess.isAuthenticated
+        if sess.isAuthenticated && offer.tutor._id != sess.clientID
             p= offer.tutor.distance + " m"
             form(action='/offer/'+offer._id, method='post')
                 input(type="hidden", name="_csrf", value=csrf)
