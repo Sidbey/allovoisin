@@ -45,7 +45,7 @@ block content
 
             fieldset
                 | Age :
-                input.form-control(name='age' value=form.age, type='number' min='14' max='100')
+                input.form-control(name='age' value=form.age, type='number', min='14', max='100', size='2')
 
             fieldset
                 .form-group
@@ -70,10 +70,6 @@ block content
                         label
                             input(type='checkbox', name='matters', value='SVT')
                             | Science de la vie et de la terre
-                    .checkbox
-                        label
-                            input(type='checkbox', name='matters', value='Maths')
-                            | Mathématiques
 
             fieldset
                 .form-group
@@ -89,4 +85,4 @@ block content
                         option Université
 
             fieldset
-                button#new-offer-submit(name='submit', type='submit', data-submit='...Sending')  Valider l&apos;inscription
+                button#new-offer-submit(name='submit', type='submit')  Valider l&apos;inscription

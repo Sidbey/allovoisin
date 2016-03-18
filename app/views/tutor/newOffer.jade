@@ -8,33 +8,60 @@ block content
 
     .container
         #Inscription.container
-            form.form-horizontal(action='/tutor/new-offer' method='post')
+            form#new-offer(action='/tutor/new-offer' method='post')
                 input(type="hidden", name="_csrf", value=csrf)
-                h2 Nouvelle Offre
+                h3  Creation d'une Offre
 
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Nom
-                    .col-sm-9
-                        input#firstName.form-control(name='name', value=form.name, type='text', placeholder='Nom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Description
-                    .col-sm-9
-                        input#firstName.form-control(name='description', value=form.description, type='text', placeholder='Prénom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='email') Matiere
-                    .col-sm-9
-                        input#email.form-control(name='matter', value=form.matter, type='text', placeholder='Adresse Mail')
-                .form-group
-                    label.col-sm-3.control-label(for='address') Niveau
-                    .col-sm-9
-                        input#address.form-control(name='level', value=form.level, type='text', placeholder='Rue')
-                .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Plage horaire jounalieire
-                    .col-sm-9
-                        input#birthDate.form-control(name='horaireMin', value=form.plageHoraire, type='text')
-                        input#birthDate.form-control(name='horaireMax', value=form.plageHoraire, type='text')
-                        input#birthDate.form-control(name='plageJournaliere', value=form.plageJournaliere, type='text')
-                        input#birthDate.form-control(name='price', value=form.price, type='number')
-                .form-group
-                    .col-sm-9.col-sm-offset-3
-                        button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
+                fieldset
+                    | Intitulé :
+                    input.form-control(name='name', value=form.name, type='text', placeholder='Intitule', autofocus='')
+
+                fieldset
+                    | Description :
+                    input.form-control(name='description', value=form.description, type='text', placeholder='Description', autofocus='')
+
+                fieldset
+                    .form-group
+                        label(for='sel1') Niveau:
+
+                        select#sel1.form-control(name='matter')
+                            option Mathématiques
+
+                            option Physique-Chimie
+
+                            option Français
+
+                            option Anglais
+
+                            option Science de la vie et de la terre
+                fieldset
+                    .form-group
+                        label(for='sel1') Niveau:
+
+                        select#sel1.form-control(name='level')
+                            option Primaire
+
+                            option College
+
+                            option Lycée
+
+                            option Université
+
+                fieldset
+                    | Plage Horaire Début :
+                    input.form-control(name='horaireMin', value=form.plageHoraire, type='text', placeholder='hh:mm')
+
+                fieldset
+                    | Plage Horaire Fin :
+                    input.form-control(name='horaireMax', value=form.plageHoraire, type='text', placeholder='hh:mm')
+
+                fieldset
+                    | Plage Journaliere :
+                    input.form-control(name='plageJournaliere', value=form.plageJournaliere, type='text', placeholder='Lundi, Mardi et Samedi')
+
+                fieldset
+                    | Prix :
+                    input.form-control(name='price', value=form.price, type='number', min='1', max='50', size='2')
+
+                fieldset
+                    button#new-offer-submit(name='submit', type='submit')  Ajouter
