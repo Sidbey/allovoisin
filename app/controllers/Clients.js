@@ -37,7 +37,7 @@ function isBadValueForTutor(form) {
     var badMatter = false;
     var badLevel = false;
     for (k in form.matters)
-        if (levelList.indexOf(form.matters[k]) == -1)
+        if (matterList.indexOf(form.matters[k]) == -1)
             badMatter = true;
     if (!isEmpty(form.level) && levelList.indexOf(form.level) == -1)
         badLevel = true;
