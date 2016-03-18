@@ -7,11 +7,12 @@ block content
     .centrer
         h2
             +promptName(tutor.firstName, tutor.lastName)
-            p= tutor.nbHour
-            p Matières
+        p= "Nombre d'heures effectuées : " + tutor.nbHour
+        p Matière(s) de Prédilection:
+        ul
             each  matter in tutor.matters
                 li= matter
-            p= tutor.level
+        p= "Niveau : " + tutor.level
         if offers
             table.table.table-striped.table-bordered
                 each offer in offers
