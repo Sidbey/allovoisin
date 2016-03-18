@@ -33,8 +33,7 @@ function completeAddress(user) {
 }
 function isBadValueForTutor(form) {
     var matterList = ['Français', 'Maths', 'PC', 'SVT', 'Anglais'];
-    var levelList = ['Sixième', 'Cinquième', 'Quatrième', 'Troisième',
-        'Seconde', 'Première', 'Terminale'];
+    var levelList = ['Primaire', 'College', 'Lycée', 'Université'];
     var badMatter = false;
     var badLevel = false;
     for (k in form.matters)
@@ -76,7 +75,7 @@ var Clients = {
             });
             checkLogin.then(function () {
                 if (error.length != 0) {
-                    res.render('signIn', {title: 'Tutor-A', form: req.body, error: error});
+                    res.render('signIn', {title: 'Tutor-A - Connexion', form: req.body, error: error});
                 }
             });
         });

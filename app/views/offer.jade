@@ -27,15 +27,30 @@ block content
                         label= offer.plageJournaliere
                     p
                         | Horaire : De
-                        label= offer.plageHoraire
+                        label= " " + offer.horaireMin
                         |  à
-                        label= offer.plageHoraire
+                        label= " " + offer.horaireMax
                     p
                     p
                         | Description :
                         label= offer.description
-            if sess.isAuthenticated
-                a.btn(href='#') Demande d'offre
+            if sess.isAuthenticated && offer._id != sess.clientID
+                a.btn(onclick="showRequest()") Demande d'offre
             else
                 p
                     b Si vous souhaitez le contacter, Incrivez vous.
+
+        if sess.isAuthenticated && offer._id != sess.clientID
+            .offer-card.hideRequest#requestForm
+                form(action='/offer/' + offer._id, method='post')
+                    input(type="hidden", name="_csrf", value=csrf)
+                    input(name='date', value=form.date, type='date', placeholder='Date', autofocus='')
+                    input(name='beginHour', value=form.beginHour, type='time', placeholder='Heure de début')
+                    input(name='duration', value=form.duration, type='number', placeholder='Durée')
+                    button.btn.btn-default Valider
+
+block script
+    script.
+        function showRequest() {
+            $('#requestForm').removeClass('hideRequest');
+        }

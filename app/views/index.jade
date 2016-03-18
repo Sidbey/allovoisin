@@ -1,50 +1,32 @@
 extends layout
 
 block content
+    header.section
+        .header-content
+            .header-content-inner
+    ul.list-inline
+        li
+            a#button.survol.btn.btn-primary.page-scroll(href='/offers') Rechercher votre tuteur
+    .container-fluid.bloc
+        .row
+            .col-sm-12.centrer
+                a#presentation
+                h2.text-center Quel est le but de ce site?
+                hr
+                p En utilisant ce site, vous pourrez trouver un tuteur proche de chez vous, Grace à une recherche qui prend en compte la distance.
 
-    img.backgound(src='/images/Teacher.jpg', alt='')
-    br
-    br
-    #section_2
-        div.recherche
-            input.recherche(type="text" placeholder="Rechercher un tuteur par nom")
-            p.recherche Recherche par matière :
-            form.recherche
-                select(name='nom', size='1')
-                    option
-                        | Français
-                    option
-                        | Anglais
-                    option
-                        | Mathématiques
-                    option
-                        | SVT
-                    option
-                        | Physique
-                    option
-                        | Chimie
-            button Recherche
-        br
-        br
-        .section-test
-            .container-fluid.presentation
-                .row
-                    .col-sm-12
-                        a#presentation
-                        h2.text-center Présentation
-                        |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quisquam asperiores provident ipsa illum delectus quam quo earum aut tempora ipsam ducimus nam facere aliquam, consequuntur, hic quos saepe fugit?
-                .row
-                    .col-sm-6
-                        a#projet.anchor
-                        h2.text-center Projets
-                        |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
-                        br
-                        i.glyphicon.glyphicon-star
-                        i.glyphicon.glyphicon-star
-                        i.glyphicon.glyphicon-star
-                        i.glyphicon.glyphicon-star
-                        i.glyphicon.glyphicon-star-empty
-                    .col-sm-6
-                        a#etudes
-                        h2.text-center Études
-                        |                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
+        .row
+            .col-sm-6.bordure-left
+                a#projet.anchor
+                h2.text-center Qui sommes nous?
+                hr
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum id eveniet, modi beatae necessitatibus provident temporibus quod. Eligendi sapiente iure, inventore rerum, impedit ducimus ullam voluptas itaque asperiores eos laboriosam.
+                br
+            .col-sm-6.bordure-right
+                a#etudes
+                h2.text-center Études
+                hr
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ab similique voluptate tempore doloremque aliquid labore fuga illum nesciunt nulla, eos veniam aut praesentium accusamus nam, rem vel in deleniti.
+    footer.cl-footer
+        h2 Tutor-A
+

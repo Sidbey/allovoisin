@@ -29,13 +29,10 @@ block content
                     .col-sm-9
                         input#address.form-control(name='level', value=form.level, type='text', placeholder='Rue')
                 .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Nombre d'heure
+                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Plage horaire jounalieire
                     .col-sm-9
-                        input#birthDate.form-control(name='nbHour', value=form.nbHour, type='number')
-                .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Nombre d'heure
-                    .col-sm-9
-                        input#birthDate.form-control(name='plageHoraire', value=form.plageHoraire, type='text')
+                        input#birthDate.form-control(name='horaireMin', value=form.plageHoraire, type='text')
+                        input#birthDate.form-control(name='horaireMax', value=form.plageHoraire, type='text')
                         input#birthDate.form-control(name='plageJournaliere', value=form.plageJournaliere, type='text')
                         input#birthDate.form-control(name='price', value=form.price, type='number')
                 .form-group

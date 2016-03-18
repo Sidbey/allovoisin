@@ -2,9 +2,9 @@ extends layout
 
 block content
     if error
-        - for (var k in error)
-        div.bg-danger
-            h3 #{error[k]}
+        each err in error
+            div.bg-danger
+                h3= err
 
     .container
         form#new-offer(action='/sign-up-tutor' method='post')
@@ -48,18 +48,32 @@ block content
                 input.form-control(name='age' value=form.age, type='number' min='14' max='100')
 
             fieldset
-            p Matière(s) de Prédilection:
                 .form-group
-                    label(for='sel1') Matière:
-
-                    select#sel1.form-control(name='matter')
-                        option Français
-
-                        option Histoire
-
-                        option Géoographie
-
-                        option Philosophie
+                    label Matière(s) de Prédilection:
+                    .checkbox
+                        label
+                            input(type='checkbox', name='matters', value='Maths')
+                            | Mathématiques
+                    .checkbox
+                        label
+                            input(type='checkbox', name='matters', value='PC')
+                            | Physique-Chimie
+                    .checkbox
+                        label
+                            input(type='checkbox', name='matters', value='Français')
+                            | Français
+                    .checkbox
+                        label
+                            input(type='checkbox', name='matters', value='Anglais')
+                            | Anglais
+                    .checkbox
+                        label
+                            input(type='checkbox', name='matters', value='SVT')
+                            | Science de la vie et de la terre
+                    .checkbox
+                        label
+                            input(type='checkbox', name='matters', value='Maths')
+                            | Mathématiques
 
             fieldset
                 .form-group
@@ -76,12 +90,3 @@ block content
 
             fieldset
                 button#new-offer-submit(name='submit', type='submit', data-submit='...Sending')  Valider l&apos;inscription
-
-        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-
-        script.
-            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\\/script>')
-
-        script(src='../../dist/js/bootstrap.min.js')
-        // IE10 viewport hack for Surface/desktop Windows 8 bug
-        script(src='../../assets/js/ie10-viewport-bug-workaround.js')

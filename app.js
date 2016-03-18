@@ -49,6 +49,7 @@ app.use(lusca({
 app.use(function (req, res, next) {
     res.locals.csrf = req.csrfToken();
     res.locals.sess = req.session;
+    res.locals.url = req.url;
     next();
 });
 
