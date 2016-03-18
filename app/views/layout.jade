@@ -39,13 +39,14 @@ html
                         span.icon-bar
                         span.icon-bar
                         span.icon-bar
-                    a.navbar-brand.page-scroll(href='#page-top') Tutor-A
+                    a.navbar-brand.page-scroll(href='/') Tutor-A
                 // Collect the nav links, forms, and other content for toggling
                 #bs-example-navbar-collapse-1.collapse.navbar-collapse
                     ul.nav.navbar-nav.navbar-right
                         +tabs('/', 'Accueil')
                         +tabs('/offers', 'Nos offres')
-                        +tabs('#portfolio', 'Nous contacter')
+                        if sess.isTutor
+                            +tabs('/new-offer', 'Nouvelle offre')
                         if sess.isAuthenticated
                             +tabs('/client/profil', 'Profil')
                             if sess.isTutor

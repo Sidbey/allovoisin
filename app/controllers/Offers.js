@@ -65,7 +65,7 @@ var Offers = {
                     }
                 });
                 promise.then(function () {
-                    res.render('offerList', {title: 'Tutor-A', offers: offers});
+                    res.render('offerList', {title: 'Tutor-A - Liste des Offres', offers: offers});
                 });
             });
         } else {
@@ -91,7 +91,7 @@ var Offers = {
                         offers.sort(function (a, b) {
                             return a.tutor.distance - b.tutor.distance;
                         });
-                        res.render('offerList', {title: 'Tutor-A', offers: offers});
+                        res.render('offerList', {title: 'Tutor-A - Liste des Offres', offers: offers});
                     });
                 });
             });
@@ -102,9 +102,8 @@ var Offers = {
         Client.findById(req.session.clientID, function (err, client) {
             if (req.method == 'GET') {
                 if (client)
-                    res.render('tutor/newOffer', {title: 'Tutor-A', form: {}});
+                    res.render('tutor/newOffer', {title: 'Tutor-A - Nouvelle Offre', form: {}});
             } else if (req.method == 'POST') {
-                console.log(typeof req.body.nbHour);
                 var error = [];
                 if (isBadValue(req)) {
                     error.push("Un champ est incorrect ou manquant !");
@@ -128,7 +127,7 @@ var Offers = {
                     });
                     res.redirect('/tutor/dashboard');
                 } else
-                    res.render('tutor/newOffer', {title: 'Tutor-A', form: req.body, error: error});
+                    res.render('tutor/newOffer', {title: 'Tutor-A - Nouvelle Offre', form: req.body, error: error});
             }
         });
 
@@ -167,10 +166,10 @@ var Offers = {
                             var dist = calculDistanceBetweenTwoPersons(client, tutor);
                             offer.tutor['distance'] = Math.round(dist);
 
-                            res.render('offer', {title: 'Tutor-A', form: {}, offer: offer});
+                            res.render('offer', {title: 'Tutor-A - Offre', form: {}, offer: offer});
                         });
                     } else
-                        res.render('offer', {title: 'Tutor-A', form: {}, offer: offer});
+                        res.render('offer', {title: 'Tutor-A - Offre', form: {}, offer: offer});
                 });
             });
 
@@ -210,7 +209,7 @@ var Offers = {
                                 offer.tutor['distance'] = Math.round(dist);
 
                                 res.render('offer', {
-                                    title: 'Tutor-A',
+                                    title: 'Tutor-A - Offre',
                                     form: form,
                                     offer: offer,
                                     error: error
