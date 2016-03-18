@@ -82,6 +82,7 @@ var Clients = {
     signOut: function (req, res, next) { // GET Request
         req.session.isAuthenticated = false;
         req.session.clientID = "";
+        req.session.isTutor = false;
         res.redirect('/');
     },
     signUp: function (req, res, next) { // POST Request

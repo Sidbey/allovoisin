@@ -33,7 +33,7 @@ var Tutors = {
                 client['nbHour'] = tutor.nbHour;
                 client['specialtiesID'] = tutor.specialtiesID;
                 Offer.find({tutorID: client.tutorID}, function (err, offers) {
-                    res.render('tutor/dashboard', {title: 'Tutor-A - Dashboard', tutor: client, offers: offers});
+                    res.render('tutor/dashboard', {title: 'Tutor-A - Dashboard', tutor: client, offers: offers, isPublic: true});
                 });
             });
 

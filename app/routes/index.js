@@ -18,7 +18,8 @@ function isClient(req, res, next) {
 
 // GET home page
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Tutor-A'});
+    console.log(req.params.error);
+    res.render('index', {title: 'Tutor-A', errMsg: req.params.error});
 });
 // GET/POST connection page
 router.get('/sign-in', isAlreadyConnected, function (req, res, next) {

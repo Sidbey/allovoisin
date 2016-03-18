@@ -13,18 +13,20 @@ block content
             ul
                 each  matter in tutor.matters
                     li= matter
-        p= "Niveau : " + tutor.level
-        if offers
-            table.table.table-striped.table-bordered
-                each offer in offers
-                    tr
-                        td= offer.name
-                        td= offer.matter.toUpperCase()
-                        td= offer.level
-                        td= offer.price + " €"
+        if level
+            p= "Niveau : " + tutor.level
+        if !isPublic
+            if offers
+                table.table.table-striped.table-bordered
+                    each offer in offers
+                        tr
+                            td= offer.name
+                            td= offer.matter.toUpperCase()
+                            td= offer.level
+                            td= offer.price + " €"
 
-        a.btn.btn-link(href='/tutor/new-offer') Créer une offre
-        a.btn.btn-link(href='/tutor/offer-requests') Voir les requêtes des clients
+            a.btn.btn-link(href='/tutor/new-offer') Créer une offre
+            a.btn.btn-link(href='/tutor/offer-requests') Voir les requêtes des clients
 
 
 
