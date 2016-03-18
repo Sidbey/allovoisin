@@ -45,8 +45,4 @@ router.get('/offers', offer.index);
 router.get('/offer/:id', offer.selectOffer);
 router.post('/offer/:id', isClient, offer.selectOffer);
 
-router.get('/tuteurs', function (req, res, next) {
-    res.render('tuteurs', {title: 'Tutor-A'});
-});
-
 module.exports = router;

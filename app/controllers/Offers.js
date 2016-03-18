@@ -117,7 +117,8 @@ var Offers = {
                         matter: req.body.matter,
                         level: req.body.level,
                         tutorID: client.tutorID,
-                        plageHoraire: req.body.horaireMin + " - " + req.body.horaireMax,
+                        horaireMin: req.body.horaireMin,
+                        horaireMax: req.body.horaireMax,
                         plageJournaliere: req.body.plageJournaliere,
                         price: parseInt(req.body.price)
                     });

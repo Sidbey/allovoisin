@@ -7,18 +7,50 @@ block content
                 h3= err
 
     if offer
-        p= offer.name
-        p= offer.matter
-        p= offer.level
-        p= offer.price + " €"
-        a(href="/tutor/" + offer.tutor.tutorID)= offer.tutor.firstName
-        p= offer.tutor.road
-        if sess.isAuthenticated && offer.tutor._id != sess.clientID
-            p= offer.tutor.distance + " m"
-            form(action='/offer/'+offer._id, method='post')
-                input(type="hidden", name="_csrf", value=csrf)
-                input(name='date', value=form.date, type='date', placeholder='Date', autofocus='')
-                input(name='beginHour', value=form.beginHour, type='time', placeholder='Heure de début')
-                input(name='duration', value=form.duration, type='number', placeholder='Durée')
-                button.btn.btn-default Valider
+        .offer-card
+            .cadre
+                img(src='', alt='')
+            .espace
+                h1= offer.name
+                h2(href="/tutor/" + offer.tutor.tutorID)= offer.tutor.firstName
+                if sess.isAuthenticated
+                    h3= offer.tutor.distance + " m"
+                h4= offer.price + " €"
+                div
+                    p
+                        | Matiere :
+                        label= offer.matter
+                    p
+                        b Disponibilité
+                    p
+                        | Journée :
+                        label= offer.plageJournaliere
+                    p
+                        | Horaire : De
+                        label= " " + offer.horaireMin
+                        |  à
+                        label= " " + offer.horaireMax
+                    p
+                    p
+                        | Description :
+                        label= offer.description
+            if sess.isAuthenticated && offer._id != sess.clientID
+                a.btn(onclick="showRequest()") Demande d'offre
+            else
+                p
+                    b Si vous souhaitez le contacter, Incrivez vous.
 
+        if sess.isAuthenticated && offer._id != sess.clientID
+            .offer-card.hideRequest#requestForm
+                form(action='/offer/' + offer._id, method='post')
+                    input(type="hidden", name="_csrf", value=csrf)
+                    input(name='date', value=form.date, type='date', placeholder='Date', autofocus='')
+                    input(name='beginHour', value=form.beginHour, type='time', placeholder='Heure de début')
+                    input(name='duration', value=form.duration, type='number', placeholder='Durée')
+                    button.btn.btn-default Valider
+
+block script
+    script.
+        function showRequest() {
+            $('#requestForm').removeClass('hideRequest');
+        }
