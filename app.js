@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var Store = require('connect-mongo')(session);
 //var csrf = require('csurf');
 var lusca = require('lusca');
 
@@ -19,7 +20,15 @@ var app = express();
 app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'jade');
 //Initialise le middleware de session
+
+// Connection a la base MongoDb
+mongoose.connect('mongodb://localhost/Allovoisin', function (err) {
+    if (err)
+        throw err;
+});
+
 app.use(session({
+    store: new Store({mongooseConnection:mongoose.connection}),
     secret: 'secret',
     resave: false,
     saveUninitialized: true
@@ -87,12 +96,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-// Connection a la base MongoDb
-mongoose.connect('mongodb://localhost/Allovoisin', function (err) {
-    if (err)
-        throw err;
-});
-
 
 module.exports = app;

@@ -16,7 +16,7 @@ function isNumber(input) {
     return input != undefined && regexNumber.test(input);
 }
 function isMatter(matter) {
-    matterList = ['Français', 'Maths', 'PC', 'SVT', 'Anglais'];
+    var matterList = ['Français', 'Mathématiques', 'Physique-Chimie', 'Science de la vie et de la terre', 'Anglais'];
     return matterList.indexOf(matter) != -1;
 }
 function isLevel(level) {

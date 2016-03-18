@@ -32,7 +32,7 @@ function completeAddress(user) {
     return user.road + ", " + /*user.postalCode + " " +*/ user.city + ", " + user.country;
 }
 function isBadValueForTutor(form) {
-    var matterList = ['Français', 'Maths', 'PC', 'SVT', 'Anglais'];
+    var matterList = ['Français', 'Mathématiques', 'Physique-Chimie', 'Science de la vie et de la terre', 'Anglais'];
     var levelList = ['Primaire', 'College', 'Lycée', 'Université'];
     var badMatter = false;
     var badLevel = false;

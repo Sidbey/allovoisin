@@ -71,12 +71,20 @@ nav {
   background-color: orange;
 }
 
+#button1{
+  color:white;
+  background-color: orange;
+}
+
 .button{
   color:white;
   background-color: orange;
   border-radius: 10px;
 }
 
+ul.list-inline #button:hover {
+  background-color: darkorange;
+}
 
 /*Taille de la photo et des caractères avec un petit écran*/
 @media (max-width:767px){
@@ -111,6 +119,12 @@ nav {
 .navbar-default .nav > li>a#button:hover,
 .navbar-default .nav>li>a#button:focus:hover {
   background-color: white;
+  color:black;
+}
+
+.navbar-default .nav > li>a#button1:hover,
+.navbar-default .nav>li>a#button1:focus:hover {
+  background-color: darkorange;
   color:black;
 }
 

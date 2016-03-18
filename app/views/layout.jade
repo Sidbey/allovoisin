@@ -6,6 +6,14 @@ mixin tabs(link, name)
         li
             a.page-scroll(href=link)= name
 
+mixin tabConnect(link, name)
+    if (link === url)
+        li
+            a#button1.page-scroll(href=link)= name
+    else
+        li
+            a.page-scroll(href=link)= name
+
 
 doctype html
 html
@@ -45,7 +53,7 @@ html
                             +tabs('/sign-out', 'Se déconnecter')
                         else
                             +tabs('/sign-up', 'S\'inscrire')
-                            +tabs('/sign-in', 'Se connecter')
+                            +tabConnect('/sign-in', 'Se connecter')
 
 
         block content
