@@ -71,17 +71,27 @@ var Tutors = {
         });
     },
     offerRequestDecision: function (req, res, next) {
-        OfferR.findById(req.body.requestID, function (err, offerRequest) {
-            var state = "";
-            if (req.body.decision === "accept") {
-                state = "accepted";
-                offerRequest.update({state: state}).exec();
+        Client.findById(req.session.clientID, function (err, client) {
+            if (client) {
+                Tutor.findById(client.tutorID, function (err, tutor) {
+                    if (tutor) {
+                        OfferR.findById(req.body.requestID, function (err, offerRequest) {
+                            var state = "";
+                            if (req.body.decision === "accept") {
+                                state = "accepted";
+                                offerRequest.update({state: state}).exec();
+                                tutor.nbHour += offerRequest.duration;
+                                tutor.save();
 
-            } else if (req.body.decision === "refuse") {
-                state = "refused";
-                offerRequest.update({state: state}).exec();
+                            } else if (req.body.decision === "refuse") {
+                                state = "refused";
+                                offerRequest.update({state: state}).exec();
+                            }
+                            res.redirect('/tutor/offer-requests');
+                        });
+                    }
+                });
             }
-            res.redirect('/tutor/offer-requests');
         });
 
     }
