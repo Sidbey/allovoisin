@@ -7,30 +7,37 @@ block content
                 h3= err
 
     .container
-        #Inscription.container
-            form.form-horizontal(action='/client/edit-profil' method='post')
-                input(type="hidden", name="_csrf", value=csrf)
-                h2 Edition du profil
+        form#new-offer(action='/client/edit-profil' method='post')
+            input(type="hidden", name="_csrf", value=csrf)
+            h3  Edition du profil
 
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Nom
-                    .col-sm-9
-                        input#firstName.form-control(name='lastName', value=form.lastName, type='text', placeholder='Nom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='firstName') Prénom
-                    .col-sm-9
-                        input#firstName.form-control(name='firstName', value=form.firstName type='text', placeholder='Prénom', autofocus='')
-                .form-group
-                    label.col-sm-3.control-label(for='email') Adresse Postale
-                    .col-sm-9
-                        input#email.form-control(name='road', value=form.road type='text', placeholder='Rue')
-                        input#email.form-control(name='city', value=form.city, type='text', placeholder='Ville')
-                        input#email.form-control(name='country', value=form.country, type='text', placeholder='Pays')
-                .form-group
-                    label.col-sm-3.control-label(for='birthDate', placeholder='age') Age
-                    .col-sm-9
-                        input#birthDate.form-control(name='age', value=form.age, type='number')
-                .form-group
-                    .col-sm-9.col-sm-offset-3
-                        button.btn.btn-primary.btn-block(type='submit') S&apos;inscrire
+            fieldset
+                | Nom :
+                input.form-control(name='lastName', value=form.lastName, type='text', placeholder='Nom', autofocus='')
 
+            fieldset
+                | Prénom :
+                input.form-control(name='firstName', value=form.firstName, type='text', placeholder='Prénom', autofocus='')
+
+            fieldset
+                | E-mail :
+                input.form-control(name='email', value=form.email, type='email', placeholder='Adresse Mail')
+
+            fieldset
+                | Rue :
+                input.form-control(name='road', value=form.road, type='text', placeholder='Rue')
+
+            fieldset
+                | Ville :
+                input.form-control(name='city', value=form.city, type='text', placeholder='Ville')
+
+            fieldset
+                | Pays :
+                input.form-control(name='country', value=form.country, type='text', placeholder='Pays')
+
+            fieldset
+                | Age :
+                input.form-control(name='age' value=form.age, type='number', min='5', max='100', size='2')
+
+            fieldset
+                button#new-offer-submit(name='submit', type='submit')  Modifier
