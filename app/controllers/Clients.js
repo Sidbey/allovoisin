@@ -52,7 +52,6 @@ var Clients = {
         });
     },
     signIn: function (req, res, next) {//POST Request
-        console.log(req.body.vehicle);
         Client.findOne({'email': req.body.email}, function (err, client) {
             if (err) throw (err);
             var error = [];
@@ -116,7 +115,6 @@ var Clients = {
                 Geoloc.getLocalisationData(address)
                     .then(locData => {
                         Object.assign(form, locData);
-                        console.log(form);
                         return Client(form).save();
                     })
                     .then(savedClient => {
@@ -129,14 +127,14 @@ var Clients = {
                     .catch(error => {
                         errors.push(error);
                         if (req.url == '/sign-up-tutor')
-                            res.render('signUpTutor', {title: 'Tutor-A', form: req.body, error: errors});
+                            res.render('signUpTutor', {title: 'Tutor-A - Inscription Tuteur', form: req.body, error: errors});
                         else
-                            res.render('signUpStudent', {title: 'Tutor-A', form: req.body, error: errors});
+                            res.render('signUpStudent', {title: 'Tutor-A - Inscription Etudiant', form: req.body, error: errors});
                     });
             } else if (req.url == '/sign-up-tutor')
-                res.render('signUpTutor', {title: 'Tutor-A', form: req.body, error: errors});
+                res.render('signUpTutor', {title: 'Tutor-A - Inscription Tuteur', form: req.body, error: errors});
             else
-                res.render('signUpStudent', {title: 'Tutor-A', form: req.body, error: errors});
+                res.render('signUpStudent', {title: 'Tutor-A - Inscription Etudiant', form: req.body, error: errors});
 
 
         });
@@ -144,17 +142,16 @@ var Clients = {
     profil: function (req, res, next) { // GET Request
         Client.findById(req.session.clientID, function (err, client) {
             if (client)
-                res.render('client/profil', {title: 'Tutor-A', client: client});
+                res.render('client/profil', {title: 'Tutor-A - Profil', client: client});
         });
     },
     editProfil: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
             if (req.method == 'GET') {
-                res.render('client/editProfil', {title: 'Tutor-A', form: client});
+                res.render('client/editProfil', {title: 'Tutor-A - Editer le Profil', form: client});
             } else if (req.method == 'POST') {
                 var form = req.body;
                 var errors = [];
-                console.log(req);
 
                 if (isBadValue(form))
                     errors.push("Un champ est incorrect ou manquant !");
@@ -164,7 +161,6 @@ var Clients = {
                     Geoloc.getLocalisationData(address)
                         .then(locData => {
                             Object.assign(form, locData);
-                            console.log(form);
                             return client.update(form);
                         })
                         .then(savedClient => {
@@ -174,14 +170,14 @@ var Clients = {
                             console.error(error);
                             errors.push(error);
                             res.render('client/editProfil', {
-                                title: 'Tutor-A',
+                                title: 'Tutor-A - Editer le Profil',
                                 form: form,
                                 error: errors
                             });
                         });
                 } else
                     res.render('client/editProfil', {
-                        title: 'Tutor-A',
+                        title: 'Tutor-A - Editer le Profil',
                         form: form,
                         error: errors
                     });
@@ -191,7 +187,7 @@ var Clients = {
     editPassword: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
             if (req.method == 'GET') {
-                res.render('client/editPassword', {title: 'Tutor-A'});
+                res.render('client/editPassword', {title: 'Tutor-A - Editer le Mot de Passe'});
             } else if (req.method == 'POST') {
                 var form = req.body;
                 var errors = [];
@@ -203,7 +199,6 @@ var Clients = {
                     errors.push("Les mdp ne correspondent pas !");
 
                 if (errors.length === 0) {
-                    console.log(form);
                     Object.assign(client, form);
                     client.save()
                         .then(savedClient => {
@@ -213,13 +208,13 @@ var Clients = {
                             console.error(error);
                             errors.push(error);
                             res.render('client/editPassword', {
-                                title: 'Tutor-A',
+                                title: 'Tutor-A - Editer le Mot de Passe',
                                 error: errors
                             });
                         });
                 } else
                     res.render('client/editPassword', {
-                        title: 'Tutor-A',
+                        title: 'Tutor-A - Editer le Mot de Passe',
                         error: errors
                     });
             }
@@ -236,12 +231,11 @@ var Clients = {
                 req.session.isTutor = true;
 
             }
-            res.render('client/profil', {title: 'Tutor-A', client: client});
+            res.render('client/profil', {title: 'Tutor-A -  - Editer le Profil', client: client});
         });
     },
     offerRequest: function (req, res, next) {
         Client.findById(req.session.clientID, function (err, client) {
-            console.log("--PRE--");
             if (client) {
                 OfferR.find({clientID: client._id}, function (err, offerRequests) {
                     if (offerRequests.length == 0)
@@ -271,7 +265,7 @@ var Clients = {
                         });
 
                     }).then(function () {
-                        res.render('client/offerRequests', {title: 'Tutor-A', offerRequests: offerRequests});
+                        res.render('client/offerRequests', {title: 'Tutor-A - Liste des Requetes', offerRequests: offerRequests});
                     });
                 });
             }

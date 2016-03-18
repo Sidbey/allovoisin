@@ -4,7 +4,6 @@ var client = require('../controllers/Clients');
 var offer = require('../controllers/Offers');
 
 function isAlreadyConnected(req, res, next) {
-    console.log('isAuth = ' + req.session.isAuthenticated);
     if (req.session.isAuthenticated === true)
         return res.redirect('/?error=alreadyConnected');
     else
@@ -23,20 +22,20 @@ router.get('/', function (req, res, next) {
 });
 // GET/POST connection page
 router.get('/sign-in', isAlreadyConnected, function (req, res, next) {
-    res.render('signIn', {title: 'Tutor-A', form: {}});
+    res.render('signIn', {title: 'Tutor-A - Se connecter', form: {}});
 });
 router.post('/sign-in', isAlreadyConnected, client.signIn);
 // GET disconnect page
 router.get('/sign-out', client.signOut);
 // GET/POST inscription page
 router.get('/sign-up', isAlreadyConnected, function (req, res, next) {
-    res.render('signUp', {title: 'Tutor-A', form: {}})
+    res.render('signUp', {title: 'Tutor-A - S\'incrire', form: {}})
 });
 router.get('/sign-up-student', isAlreadyConnected, function (req, res, next) {
-    res.render('signUpStudent', {title: 'Tutor-A', form: {}})
+    res.render('signUpStudent', {title: 'Tutor-A - Inscription Etudiant', form: {}})
 });
 router.get('/sign-up-tutor', isAlreadyConnected, function (req, res, next) {
-    res.render('signUpTutor', {title: 'Tutor-A', form: {}})
+    res.render('signUpTutor', {title: 'Tutor-A - Inscription Tuteur', form: {}})
 });
 router.post('/sign-up-student', isAlreadyConnected, client.signUp);
 router.post('/sign-up-tutor', isAlreadyConnected, client.signUp);
