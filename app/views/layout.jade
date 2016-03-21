@@ -46,7 +46,7 @@ html
                         +tabs('/', 'Accueil')
                         +tabs('/offers', 'Nos offres')
                         if sess.isTutor
-                            +tabs('/new-offer', 'Nouvelle offre')
+                            +tabs('/tutor/new-offer', 'Nouvelle offre')
                         if sess.isAuthenticated
                             +tabs('/client/profil', 'Profil')
                             if sess.isTutor
